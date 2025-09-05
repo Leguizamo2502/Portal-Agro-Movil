@@ -1,0 +1,86 @@
+/* Altura completa */
+.vh-100 { height: 100vh; }
+.h-100  { height: 100%; }
+
+/* Fondo general (puedes poner imagen si quieres) */
+.fondo-auth {
+  --background: #f7faf7; /* fondo claro */
+}
+
+/* Columna izquierda (solo md+) */
+.left-col {
+  color: #fff;
+}
+.left-col .title-left {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Logo */
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+/* Card del formulario */
+.formaForm {
+  border-radius: 1rem;
+  max-width: 500px;
+  min-width: 300px;
+  width: 90%;
+  margin-inline: auto;
+
+  /* Fondo verde + texto blanco */
+  --background: #2e7d32;  /* verde oscuro */
+  --color: #ffffff;
+}
+
+/* Título */
+.titleForm {
+  color: #ffffff; /* blanco para contrastar con el fondo verde */
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Botón principal */
+.btn-custom {
+  --background: #1cc736;
+  --color: #fff;
+  height: 3rem;
+  border-radius: 0.6rem;
+}
+
+/* Inputs con fondo */
+.input-custom {
+  --background: #f2f5f2;
+  border-radius: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Enlaces */
+.link {
+  color: var(--ion-color-primary);
+  text-decoration: none;
+}
+
+/* Helpers */
+.mt-8  { margin-top: 0.5rem; }
+.mt-12 { margin-top: 0.75rem; }
+.mb-16 { margin-bottom: 1rem; }
+
+/* Columna izquierda con degradado */
+@media (min-width: 768px) {
+  .left-col {
+    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+    border-radius: 1rem;
+    margin-right: 1rem;
+    padding: 2rem;
+  }
+}
+
+/* Si quieres usar imagen de fondo en toda la pantalla:
+.fondo-auth {
+  --background: transparent;
+  background: url('assets/imagenes/tu-fondo.jpg') no-repeat center center/cover;
+}
+*/

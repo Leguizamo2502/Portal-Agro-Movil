@@ -1,3 +1,84 @@
-<p>
-  login works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fondo-auth">
+
+  <ion-grid class="vh-100">
+    <ion-row class="h-100 ion-align-items-center">
+
+      <!-- Columna izquierda (oculta en pantallas pequeñas) -->
+      <ion-col size="12" sizeMd="6" class="ion-text-center ion-hide-md-down left-col">
+        <img src="assets/logos/logo.png" alt="Logo" class="logo mb-16" />
+        <h2 class="title-left">Portal Agro-comercial del Huila</h2>
+      </ion-col>
+
+      <!-- Columna derecha (formulario) -->
+      <ion-col size="12" sizeMd="6" class="ion-justify-content-center ion-align-items-center ion-text-center">
+        <ion-card class="formaForm mx-auto">
+          <ion-card-content>
+            <h3 class="titleForm ion-text-center">Iniciar Sesión</h3>
+
+            <div class="mt-8 ion-text-center">
+              <ion-text>¿No tienes cuenta?
+                <a [routerLink]="['/auth/register']" class="link">Regístrate</a>
+              </ion-text>
+            </div>
+
+            <form [formGroup]="formLogin" (ngSubmit)="login()" class="mt-12">
+
+              <!-- Email -->
+              <ion-item class="input-custom" lines="none">
+                <ion-label position="floating">Correo Electrónico</ion-label>
+                <ion-input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  placeholder="Correo Electrónico">
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched">
+                {{ getErrorMessage('email') }}
+              </ion-note>
+
+              <!-- Password -->
+              <ion-item class="input-custom mt-12" lines="none">
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input
+                  id="password"
+                  type="password"
+                  formControlName="password"
+                  placeholder="Contraseña">
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">
+                {{ getErrorMessage('password') }}
+              </ion-note>
+
+              <div class="mt-8 ion-text-end">
+                <a [routerLink]="['/auth/recover-password']" class="link">¿Olvidaste tu contraseña?</a>
+              </div>
+
+              <ion-button
+                class="btn-custom mt-12"
+                type="submit"
+                expand="block"
+                [disabled]="formLogin.invalid || loading">
+                Iniciar Sesión
+              </ion-button>
+
+              <!-- (Opcional) Invitado -->
+              <!--
+              <ion-button fill="outline" expand="block" (click)="me()">Ingresar como invitado</ion-button>
+              -->
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -11,4 +11,4 @@ export interface RecoverPasswordConfirmModel{
     email: string;
     code : string;
     newPassword: string;
-}
+} 

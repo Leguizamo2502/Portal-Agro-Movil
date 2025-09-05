@@ -1,8 +1,21 @@
-import { inject } from "@angular/core";
-import { BehaviorSubject, Observable, tap, switchMap, of, shareReplay, catchError, firstValueFrom } from "rxjs";
-import { UserMeDto } from "../../models/login.model";
-import { AuthService } from "./auth-service";
+// core/auth/auth.state.ts
+import { Injectable, inject } from '@angular/core';
+import {
+  BehaviorSubject,
+  catchError,
+  firstValueFrom,
+  Observable,
+  of,
+  shareReplay,
+  switchMap,
+  tap,
+} from 'rxjs';
 
+import { AuthService } from './auth.service';
+import { UserMeDto } from '../../models/login.model';
+
+
+@Injectable({ providedIn: 'root' })
 export class AuthState {
   private authService = inject(AuthService);
 
