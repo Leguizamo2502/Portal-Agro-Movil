@@ -1,3 +1,20 @@
-<p>
-  container-card works!
-</p>
+<ion-content class="ion-padding">
+  <ion-card class="product-section">
+    <!-- Título -->
+    <ion-card-header *ngIf="showHeader">
+      <ion-card-title>{{ title }}</ion-card-title>
+    </ion-card-header>
+
+    <!-- Contenedor horizontal -->
+    <ion-card-content>
+      <div class="product-container">
+        <app-card
+          *ngFor="let p of products; trackBy: trackById"
+          [product]="p"
+          [showFavorite]="showFavorite"
+          [showActions]="false">
+        </app-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
