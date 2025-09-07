@@ -1,37 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { finalize, switchMap, take } from 'rxjs/operators';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { take, switchMap, finalize } from 'rxjs/operators';
 
-// Ionic
-import {
-  IonHeader, IonToolbar, IonTitle, IonContent,
-  IonGrid, IonRow, IonCol, IonCard, IonCardContent,
-  IonItem, IonLabel, IonInput, IonButton, IonText, IonNote
-} from '@ionic/angular/standalone';
-import { LoadingController, ToastController } from '@ionic/angular';
+// Ionic: usa IonicModule para evitar importar cada Ion* por separado
+import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
+
+// Servicios propios
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AuthState } from 'src/app/core/services/auth/auth.state';
-import { FooterComponent } from 'src/app/shared/components/footer/footer/footer.component';
-
-
-// Tus servicios (ajusta la ruta si cambia en tu móvil)
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [
-    CommonModule, ReactiveFormsModule, RouterLink,
-    IonHeader, IonToolbar, IonTitle, IonContent,
-    IonGrid, IonRow, IonCol, IonCard, IonCardContent,
-    IonItem, IonLabel, IonInput, IonButton, IonText, IonNote, FooterComponent,
-],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, IonicModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -55,16 +38,12 @@ export class LoginComponent {
     if (control?.hasError('required')) {
       return `${field === 'email' ? 'Correo electrónico' : 'Contraseña'} es requerido`;
     }
-    if (control?.hasError('email')) {
-      return 'Ingrese un correo electrónico válido';
-    }
-    if (control?.hasError('minlength')) {
-      return 'La contraseña debe tener al menos 6 caracteres';
-    }
+    if (control?.hasError('email')) return 'Ingrese un correo electrónico válido';
+    if (control?.hasError('minlength')) return 'La contraseña debe tener al menos 6 caracteres';
     return '';
   }
 
-  async presentToast(message: string, color: 'success' | 'danger' | 'medium' = 'medium') {
+  private async toast(message: string, color: 'success' | 'danger' | 'medium' = 'medium') {
     const t = await this.toastCtrl.create({ message, duration: 1800, color, position: 'top' });
     await t.present();
   }
@@ -72,19 +51,16 @@ export class LoginComponent {
   async login() {
     if (this.formLogin.invalid || this.loading) return;
 
-    const objeto = {
+    const payload = {
       email: this.formLogin.value.email!,
       password: this.formLogin.value.password!,
     };
 
     this.loading = true;
-    const loading = await this.loadingCtrl.create({
-      message: 'Iniciando sesión...',
-      spinner: 'circles',
-    });
+    const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...', spinner: 'circles' });
     await loading.present();
 
-    this.auth.Login(objeto).pipe(
+    this.auth.Login(payload).pipe(
       take(1),
       switchMap(() => this.authState.loadMe()),
       finalize(async () => {
@@ -94,26 +70,26 @@ export class LoginComponent {
     ).subscribe({
       next: async (me) => {
         if (!me) {
-          await this.presentToast('No se pudo cargar tu sesión. Intenta nuevamente.', 'danger');
+          await this.toast('No se pudo cargar tu sesión. Intenta nuevamente.', 'danger');
           return;
         }
-        await this.presentToast('Inicio de sesión exitoso.', 'success');
+        await this.toast('Inicio de sesión exitoso.', 'success');
         this.router.navigateByUrl('/home/inicio');
       },
       error: async (err) => {
         const msg = err?.status === 401
           ? 'Credenciales inválidas.'
           : err?.error?.message || 'No se pudo iniciar sesión.';
-        await this.presentToast(msg, 'danger');
+        await this.toast(msg, 'danger');
       }
     });
   }
 
-  // (Opcional) Tal cual tu método me(), por si quieres probar el endpoint protegido
+  // Opcional: probar endpoint protegido
   me() {
     this.auth.GetMe().subscribe({
       next: (data) => console.log(data),
-      error: (err) => this.presentToast(err?.message || 'Error consultando perfil', 'danger'),
+      error: (err) => this.toast(err?.message || 'Error consultando perfil', 'danger'),
     });
   }
 }

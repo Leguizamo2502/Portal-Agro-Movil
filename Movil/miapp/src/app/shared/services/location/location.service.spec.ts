@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PasswordPolicy } from './password-policy';
+import { LocationService } from './location.service';
 
-describe('PasswordPolicy', () => {
-  let service: PasswordPolicy;
+describe('LocationService', () => {
+  let service: LocationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PasswordPolicy);
+    service = TestBed.inject(LocationService);
   });
 
   it('should be created', () => {
