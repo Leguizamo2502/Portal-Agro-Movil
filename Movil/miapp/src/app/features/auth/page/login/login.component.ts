@@ -18,6 +18,7 @@ import {
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { AuthState } from 'src/app/core/services/auth/auth.state';
+import { FooterComponent } from 'src/app/shared/components/footer/footer/footer.component';
 
 
 // Tus servicios (ajusta la ruta si cambia en tu móvil)
@@ -29,11 +30,10 @@ import { AuthState } from 'src/app/core/services/auth/auth.state';
     CommonModule, ReactiveFormsModule, RouterLink,
     IonHeader, IonToolbar, IonTitle, IonContent,
     IonGrid, IonRow, IonCol, IonCard, IonCardContent,
-    IonItem, IonLabel, IonInput, IonButton, IonText, IonNote
-  ],
+    IonItem, IonLabel, IonInput, IonButton, IonText, IonNote, FooterComponent,
+],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [TabBarComponent, FooterComponent],
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);

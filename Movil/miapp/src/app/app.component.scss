@@ -1,0 +1,17 @@
+ion-menu {
+  --width: 260px; /* ajusta a tu sidebar */
+  z-index: 9999;
+}
+
+ion-menu::part(backdrop) {
+  backdrop-filter: blur(3px); /* efecto bonito */
+}
+
+ion-menu[type="overlay"] {
+  position: absolute !important;
+}
+#main-content {
+  width: 100% !important;
+  transform: none !important;
+  position: relative;
+}

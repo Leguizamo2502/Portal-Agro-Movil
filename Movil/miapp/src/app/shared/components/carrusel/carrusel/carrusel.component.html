@@ -1,3 +1,20 @@
-<p>
-  carrusel works!
-</p>
+<swiper-container
+  #swiperRef
+  slides-per-view="1"
+  space-between="10"
+  pagination="true"
+  navigation="true"
+  autoplay-delay="4000"
+  loop="true"
+  effect="fade"
+  class="carrusel-container"
+>
+  <swiper-slide *ngFor="let slide of slides">
+    <div class="slide-content">
+      <img [src]="slide.image" alt="Imagen del carrusel" />
+      <div class="overlay-text">
+        <h2>{{ slide.title }}</h2>
+      </div>
+    </div>
+  </swiper-slide>
+</swiper-container>

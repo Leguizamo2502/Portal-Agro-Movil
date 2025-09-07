@@ -1,0 +1,40 @@
+.carrusel-container {
+  width: 100%;
+  height: 250px; /* Ajusta la altura global del carrusel */
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slide-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta para que la imagen no se deforme */
+  display: block;
+}
+
+/* Texto centrado en el medio del carrusel */
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 90%;
+}
+
+
+// cambiar color
+.swiper-button-next, .swiper-button-prev{
+    color: transparent !important;
+}

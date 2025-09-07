@@ -1,3 +1,37 @@
-<p>
-  footer works!
-</p>
+<ion-footer class="footer-container">
+  <ion-toolbar>
+    <ion-grid class="footer-grid">
+      <ion-row class="footer-row">
+
+        <!-- Sobre nosotros -->
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center ion-text-md-start">
+          <h5 class="footer-title">Portal Agro Comercial</h5>
+          <p>
+            Conectamos a los productores del Huila con consumidores que valoran
+            la calidad y el origen.
+          </p>
+        </ion-col>
+
+        <!-- Logo -->
+        <ion-col size="12" size-lg="4" class="ion-text-center">
+          <img src="../../../../../assets/logos/logo.png" alt="Logo" class="footer-logo" />
+        </ion-col>
+
+        <!-- Contacto -->
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center ion-text-md-start">
+          <h5 class="footer-title">Contacto</h5>
+          <p><strong>Ubicación:</strong> {{ location }}</p>
+          <p><strong>Correo:</strong> {{ email }}</p>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+
+  <!-- Derechos reservados -->
+  <ion-toolbar class="footer-bottom">
+    <p class="ion-text-center">
+      &copy; 2025 Portal Agro Comercial - Todos los derechos reservados
+    </p>
+  </ion-toolbar>
+</ion-footer>

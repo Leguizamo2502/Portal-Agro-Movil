@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { NavbarVerticalComponent } from './navbar-vertical.component';
+import { SidebarComponent } from './sidebar.component';
 
-describe('NavbarVerticalComponent', () => {
-  let component: NavbarVerticalComponent;
-  let fixture: ComponentFixture<NavbarVerticalComponent>;
+describe('SidebarComponent', () => {
+  let component: SidebarComponent;
+  let fixture: ComponentFixture<SidebarComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarVerticalComponent ],
+      declarations: [ SidebarComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NavbarVerticalComponent);
+    fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

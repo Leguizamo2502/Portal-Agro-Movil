@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -12,7 +13,8 @@ export const routes: Routes = [
 
   {
     path: 'home',
-    loadComponent: () => import('./page/home/home.page').then( m => m.HomePage)
+    loadComponent: () =>
+      import('./features/home/pages/home/home.component').then((m) => m.HomeComponent)
   }
 
 ];

@@ -1,0 +1,47 @@
+.sidebar {
+  --background: #d1fae5;
+  padding: 12px;
+  max-width: 90%;
+  margin: 0 auto;
+  border: 2px solid #10b981;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+ion-item {
+  --background-hover: transparent;
+  --background-activated: transparent;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover sólido personalizado */
+ion-item:hover::part(native) {
+  background: var(--ion-color-success) !important;
+  color: white !important;
+}
+
+
+ion-item.active {
+  --background: #16a34a;
+  --color: white;
+}
+
+.submenu {
+  padding-left: 16px;
+}
+.sidebar-content {
+  --background: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.user-info {
+  padding: 16px;
+  flex-shrink: 0; /* siempre visible */
+}
+
+ion-list {
+  flex: 1; /* ocupa el espacio restante */
+  overflow-y: auto; /* scroll solo en el listado */
+}
