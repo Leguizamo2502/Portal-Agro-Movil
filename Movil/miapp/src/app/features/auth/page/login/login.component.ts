@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { take, switchMap, finalize } from 'rxjs/operators';
 
-// Ionic: usa IonicModule para evitar importar cada Ion* por separado
+// Ionic (módulo único para componentes Ion)
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 
 // Servicios propios
@@ -74,7 +74,7 @@ export class LoginComponent {
           return;
         }
         await this.toast('Inicio de sesión exitoso.', 'success');
-        this.router.navigateByUrl('/home/inicio');
+        this.router.navigateByUrl('/home');
       },
       error: async (err) => {
         const msg = err?.status === 401
@@ -85,7 +85,7 @@ export class LoginComponent {
     });
   }
 
-  // Opcional: probar endpoint protegido
+  // (Opcional) Probar endpoint protegido
   me() {
     this.auth.GetMe().subscribe({
       next: (data) => console.log(data),
