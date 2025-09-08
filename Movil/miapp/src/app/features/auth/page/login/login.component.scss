@@ -1,29 +1,58 @@
-/* Helpers de altura */
+/* Altura */
 .vh-100 { height: 100vh; }
 .h-100  { height: 100%; }
 
-/* Mismos estilos que tu Angular (mínimos) */
-.titleForm {
-  color: #2e7d32;
-  font-size: 2rem;
+/* Fondo SIN slash inicial (evita 404) */
+.fondo-auth {
+  --background: url('src/assets/backgrounds/fondologin.jpg') center/cover no-repeat;
 }
+
+/* Columna izquierda (solo md+) */
+.left-col { color: #fff; }
+.title-left { font-weight: 700; font-size: 1.8rem; }
+
+/* Logo */
+.logo { width: 200px; height: auto; }
+
+/* Card del formulario */
 .formaForm {
   border-radius: 1rem;
   max-width: 500px;
   min-width: 300px;
   width: 90%;
+  margin-inline: auto;
 }
+
+/* Título */
+.titleForm {
+  color: #2e7d32;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Botón principal */
 .btn-custom {
   --background: #1cc736;
   --color: #fff;
   height: 3rem;
   border-radius: .5rem;
 }
+
+/* Inputs con fondo */
 .input-custom {
   --background: #f2f5f2;
   border-radius: .5rem;
-  height: 3rem;
+  min-height: 3rem;
 }
 
-/* Fondo (la imagen la pones desde el HTML) */
-.fondo-auth { --background: transparent; }
+/* Etiquetas y notas */
+.label { display: block; text-align: left; margin: .25rem 0; }
+.note  { display: block; margin-top: .25rem; text-align: left; }
+
+/* Enlaces */
+.link { color: var(--ion-color-primary); text-decoration: none; }
+
+/* Helpers */
+.mt-8  { margin-top: .5rem; }
+.mt-12 { margin-top: .75rem; }
+.mb-16 { margin-bottom: 1rem; }
