@@ -1,65 +1,53 @@
-<ion-content
-  class="container-fluid vh-100 fondo-auth"
-  [style.background-image]="'url(/assets/imagenes/fondos/campo.jpg)'"
-  style="background-size:cover;background-position:center;--background:transparent"
->
+<ion-content class="vh-100 fondo-auth">
   <ion-grid class="vh-100">
     <ion-row class="h-100 ion-align-items-center">
-
       <!-- Columna izquierda (oculta en pantallas pequeñas) -->
-      <ion-col size="12" sizeMd="6" class="ion-hide-md-down ion-text-center" style="color:#fff">
-        <img src="assets/logos/logo.png" alt="Logo" style="width:200px;margin-bottom:1rem">
-        <h2 class="ion-text-center">Portal Agro-comercial del Huila</h2>
+      <ion-col size="12" sizeMd="6" class="ion-hide-md-down ion-text-center left-col">
+        <img src="assets/logos/logo.png" alt="Logo" class="logo mb-16" />
+        <h2 class="title-left">Portal Agro-comercial del Huila</h2>
       </ion-col>
 
       <!-- Columna derecha (formulario) -->
       <ion-col size="12" sizeMd="6" class="ion-justify-content-center ion-align-items-center ion-text-center">
-        <ion-card class="formaForm" style="margin:0 auto">
+        <ion-card class="formaForm">
           <ion-card-content>
+            <h3 class="titleForm ion-text-center">Iniciar Sesión</h3>
 
-            <h3 class="text-center titleForm" style="margin-bottom:1rem">Iniciar Sesión</h3>
-
-            <div class="ion-text-center" style="margin-top:.75rem">
+            <div class="ion-text-center mt-8">
               ¿No tienes cuenta?
-              <a [routerLink]="['/auth/register']" style="color:#0d6efd;text-decoration:none">Regístrate</a>
+              <a [routerLink]="['/auth/register']" class="link">Regístrate</a>
             </div>
 
-            <form [formGroup]="formLogin" (ngSubmit)="login()" style="margin-top:1rem">
+            <form [formGroup]="formLogin" (ngSubmit)="login()" class="mt-12">
               <!-- Email -->
-              <label for="email" style="display:block;text-align:left;margin:.25rem 0">Correo Electrónico</label>
+              <label for="email" class="label">Correo Electrónico</label>
               <ion-item lines="none" class="input-custom">
                 <ion-input id="email" type="email" formControlName="email" placeholder="Correo Electrónico"></ion-input>
               </ion-item>
-              <ion-note color="danger"
-                        *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched"
-                        style="display:block;margin-top:.25rem;text-align:left">
+              <ion-note color="danger" *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched" class="note">
                 {{ getErrorMessage('email') }}
               </ion-note>
 
               <!-- Password -->
-              <label for="password" style="display:block;text-align:left;margin:1rem 0 .25rem 0">Contraseña</label>
+              <label for="password" class="label mt-12">Contraseña</label>
               <ion-item lines="none" class="input-custom">
                 <ion-input id="password" type="password" formControlName="password" placeholder="Contraseña"></ion-input>
               </ion-item>
-              <ion-note color="danger"
-                        *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched"
-                        style="display:block;margin-top:.25rem;text-align:left">
+              <ion-note color="danger" *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched" class="note">
                 {{ getErrorMessage('password') }}
               </ion-note>
 
-              <div class="ion-text-end" style="margin:.75rem 0">
-                <a [routerLink]="['/auth/recover-password']" style="text-decoration:none">¿Olvidaste tu contraseña?</a>
+              <div class="ion-text-end mt-8">
+                <a [routerLink]="['/auth/recover-password']" class="link">¿Olvidaste tu contraseña?</a>
               </div>
 
-              <ion-button type="submit" expand="block" class="btn-custom" [disabled]="formLogin.invalid || loading">
+              <ion-button type="submit" expand="block" class="btn-custom mt-12" [disabled]="formLogin.invalid || loading">
                 Iniciar Sesión
               </ion-button>
             </form>
-
           </ion-card-content>
         </ion-card>
       </ion-col>
-
     </ion-row>
   </ion-grid>
 </ion-content>
