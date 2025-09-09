@@ -16,6 +16,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/home/pages/home/home.component').then((m) => m.HomeComponent)
   },
- 
+  {
+    path: 'card',
+    loadComponent:() =>
+      import('./shared/components/cards/card/card.component').then((m) => m.CardComponent)
+  }
 
 ];

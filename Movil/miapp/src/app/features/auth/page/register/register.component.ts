@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 
 // ✅ USA SIEMPRE ESTAS RUTAS (todo en minúscula)
-import { RegisterUserModel } from 'src/app/core/models/registeruser.model';
+import { RegisterUserModel } from 'src/app/core/models/registerUser.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { LocationService } from 'src/app/shared/services/location/location.service';
 import { CityModel, DepartmentModel } from 'src/app/shared/models/location/location.model';

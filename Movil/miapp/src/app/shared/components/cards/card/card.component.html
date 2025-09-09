@@ -1,3 +1,55 @@
-<p>
-  card works!
-</p>
+<ion-card class="product-card" button (click)="onDetail(product)">
+  <!-- FAVORITO -->
+  <!-- <div *appIfLoggedIn>
+    <ion-button
+      *ngIf="showFavorite"
+      class="fav-btn"
+      fill="clear"
+      [disabled]="disabledFavorite"
+      (click)="onFavoriteClick($event)"
+    >
+      <ion-icon
+        [name]="product.isFavorite ? 'star' : 'star-outline'"
+        slot="icon-only"
+      ></ion-icon>
+    </ion-button>
+  </div> -->
+
+  <!-- Imagen -->
+  <div class="image-wrap">
+    <ion-img
+      class="card-image"
+      [src]="imageUrl"
+      alt="Imagen del producto"
+      (ionError)="onImgError($event)"
+    ></ion-img>
+  </div>
+
+  <ion-card-content class="content">
+    <h3 class="title line-2" [title]="product.name">{{ product.name }}</h3>
+
+    <p class="info-row">
+      <ion-icon name="person" color="primary"></ion-icon>
+      {{ product.personName }}
+    </p>
+
+    <p class="info-row">
+      <ion-icon name="location" color="primary"></ion-icon>
+      {{ product.cityName }}, {{ product.departmentName }}
+    </p>
+
+    <p class="price">
+      ${{ product.price | number: '1.0-0' }}
+    </p>
+
+    <div *ngIf="showActions" class="actions">
+      <ion-button fill="clear" color="primary" (click)="onEditClick($event)">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" color="danger" (click)="onDeleteClick($event)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
