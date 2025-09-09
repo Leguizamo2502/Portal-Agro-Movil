@@ -1,14 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ButtonComponent } from 'src/app/shared/components/button/button/button.component';
+
 
 @Component({
   selector: 'app-not-found',
+  imports: [ButtonComponent],
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss'],
+  styleUrl: './not-found.component.scss'
 })
-export class NotFoundComponent  implements OnInit {
+export class NotFoundComponent {
+  private location = inject(Location);
+  private router = inject(Router);
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  goBack(): void {
+    // Regresa a la página anterior si existe; si no, va al inicio
+    if (window.history.length > 1) this.location.back();
+    else this.router.navigateByUrl('/');
+  }
 }

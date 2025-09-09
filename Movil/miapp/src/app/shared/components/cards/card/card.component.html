@@ -1,54 +1,51 @@
-<ion-card class="product-card" button (click)="onDetail(product)">
+<ion-card class="product-card" role="button" tabindex="0"
+  (click)="onDetail(product)"
+  (keydown.enter)="onDetail(product)"
+  (keydown.space)="onDetail(product); $event.preventDefault()">
+
   <!-- FAVORITO -->
-  <!-- <div *appIfLoggedIn>
-    <ion-button
-      *ngIf="showFavorite"
+  <div *appIfLoggedIn>
+    <ion-button *ngIf="showFavorite"
       class="fav-btn"
       fill="clear"
       [disabled]="disabledFavorite"
       (click)="onFavoriteClick($event)"
-    >
-      <ion-icon
-        [name]="product.isFavorite ? 'star' : 'star-outline'"
-        slot="icon-only"
-      ></ion-icon>
+      (keydown.enter)="$event.stopPropagation()"
+      (keydown.space)="$event.stopPropagation(); $event.preventDefault()"
+      aria-label="Favorito">
+      <ion-icon [name]="product.isFavorite ? 'star' : 'star-outline'"></ion-icon>
     </ion-button>
-  </div> -->
+  </div>
 
   <!-- Imagen -->
   <div class="image-wrap">
-    <ion-img
-      class="card-image"
-      [src]="imageUrl"
-      alt="Imagen del producto"
-      (ionError)="onImgError($event)"
-    ></ion-img>
+    <img class="card-image" [src]="imageUrl" alt="Imagen del producto" (error)="onImgError($event)" />
   </div>
 
   <ion-card-content class="content">
     <h3 class="title line-2" [title]="product.name">{{ product.name }}</h3>
 
     <p class="info-row">
-      <ion-icon name="person" color="primary"></ion-icon>
+      <ion-icon name="person" aria-hidden="true"></ion-icon>
       {{ product.personName }}
     </p>
 
     <p class="info-row">
-      <ion-icon name="location" color="primary"></ion-icon>
+      <ion-icon name="location" aria-hidden="true"></ion-icon>
       {{ product.cityName }}, {{ product.departmentName }}
     </p>
 
     <p class="price">
-      ${{ product.price | number: '1.0-0' }}
+      ${{ product.price | number:'1.0-0' }}
     </p>
 
     <div *ngIf="showActions" class="actions">
-      <ion-button fill="clear" color="primary" (click)="onEditClick($event)">
-        <ion-icon name="create-outline"></ion-icon>
+      <ion-button fill="clear" (click)="onEditClick($event)" aria-label="Editar producto">
+        <ion-icon class="icon-edit" name="create"></ion-icon>
       </ion-button>
 
-      <ion-button fill="clear" color="danger" (click)="onDeleteClick($event)">
-        <ion-icon name="trash-outline"></ion-icon>
+      <ion-button fill="clear" (click)="onDeleteClick($event)" aria-label="Eliminar producto">
+        <ion-icon class="icon-delete" name="trash"></ion-icon>
       </ion-button>
     </div>
   </ion-card-content>

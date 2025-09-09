@@ -1,25 +1,38 @@
+// app.routes.ts
+import { Routes } from '@angular/router';
+import { MainLayoutComponent } from './shared/components/layouts/main-layout/main-layout.component';
+import { ForbiddenComponent } from './core/pages/forbidden/forbidden.component';
+import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
   {
     path: 'auth',
-    // canMatch: [guestGuard],
     loadChildren: () =>
-      import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+      import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES),
   },
-  // DEMOS PARA VISUALIZAR LOS COMPONENTES Y PAGINAS
 
   {
-    path: 'home',
-    loadComponent: () =>
-      import('./features/home/pages/home/home.component').then((m) => m.HomeComponent)
+    path: '',
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./features/home/home.routes').then(m => m.HOME_ROUTES),
+      },
+      // {
+      //   path: 'account',
+      //   loadChildren: () =>
+      //     import('./features/account/account.routes').then(r => r.ACCOUNT_ROUTES),
+      // },
+      { path: 'forbidden', component: ForbiddenComponent },
+      { path: 'notFound', component: NotFoundComponent },
+      // (demos/otros si quieres, igual que en tu Angular)
+    ],
   },
-  {
-    path: 'card',
-    loadComponent:() =>
-      import('./shared/components/cards/card/card.component').then((m) => m.CardComponent)
-  }
 
+  { path: '**', redirectTo: 'notFound' },
 ];

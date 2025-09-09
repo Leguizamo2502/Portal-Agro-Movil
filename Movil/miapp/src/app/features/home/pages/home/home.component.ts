@@ -1,27 +1,32 @@
-import { Component, ViewChild } from '@angular/core';
-import { SidebarComponent } from 'src/app/shared/components/sidebar/sidebar.component';
-import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonFooter, IonMenu } from '@ionic/angular/standalone';
-import { FooterComponent } from 'src/app/shared/components/footer/footer/footer.component';
-import { CarruselComponent } from "src/app/shared/components/carrusel/carrusel/carrusel.component";
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+
+import { ProductService } from 'src/app/shared/services/product/product.service';
+import { ProductSelectModel } from 'src/app/shared/models/product/product.model';
+import { CarruselComponent } from 'src/app/shared/components/carrusel/carrusel/carrusel.component';
+import { ContainerCardComponent } from 'src/app/shared/components/cards/container-card/container-card/container-card.component';
+
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [IonFooter,
-    SidebarComponent,
-    IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle,
-    IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
-    FooterComponent, IonMenu, CarruselComponent]
+  imports: [CommonModule, IonicModule, CarruselComponent, ContainerCardComponent],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  private productService = inject(ProductService);
+  products: ProductSelectModel[] = [];
 
-  @ViewChild(CarruselComponent) carrusel!: CarruselComponent;
-  @ViewChild(IonMenu) menu!: IonMenu;
-
-  onMenuClose() {
-    setTimeout(() => this.carrusel?.updateSwiper(), 200); // espera un poco para recalcular
+  ngOnInit(): void {
+    this.loadProduct();
   }
 
+  private loadProduct(): void {
+    this.productService.getAllHome().subscribe(data => {
+      this.products = data;
+      console.log('HomeComponent - productos cargados:', this.products);
+    });
+  }
 }

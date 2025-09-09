@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthState } from '../../services/auth/auth.state';
 
 @Component({
   selector: 'app-forbidden',
+  imports: [],
   templateUrl: './forbidden.component.html',
-  styleUrls: ['./forbidden.component.scss'],
+  styleUrl: './forbidden.component.scss'
 })
-export class ForbiddenComponent  implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {}
+export class ForbiddenComponent implements OnInit{
+  private auth = inject(AuthState);
+  
+  ngOnInit(): void {
+    this.auth.loadMe().subscribe(()=>{
+      console.log("No autorizado")
+    })
+  }
+  
 
 }

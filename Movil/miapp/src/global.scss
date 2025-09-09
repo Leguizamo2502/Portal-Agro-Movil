@@ -1,40 +1,82 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-/* Core CSS required for Ionic components to work properly */
+/* Core CSS requerido por Ionic */
 @import "@ionic/angular/css/core.css";
 
-/* Basic CSS for apps built with Ionic */
+/* Básicos */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Utils opcionales */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
+/* Dark mode desactivado globalmente (lo manejas tú por página si quieres) */
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-::ng-deep ion-content.sidebar-content .inner-scroll.scroll-y {
-  overflow-y: none !important;
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Base suave detrás del contenido (no fuerza ion-content) */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f9f7f1;
+}
+
+/* Utilidades (déjalas solo si las usas en alguna página) */
+ion-content.bg-default {
+  --background: #f9f7f1;
+  background: #f9f7f1;
+}
+ion-content.bg-transparent {
+  --background: transparent;
+  background: transparent;
+}
+
+/* Sidebar: mantenlo si de verdad necesitas bloquear su scroll interno */
+:host ::ng-deep ion-content.sidebar-content .inner-scroll.scroll-y {
+  overflow-y: hidden !important;
+}
+/* ===== Scrollbar global ultra-delgada (sin quitar scroll) ===== */
+:root { --sb-size: 1px; } /* cambia a 3px si la quieres aún más fina */
+
+/* Firefox + IE/Edge antiguo */
+html, body,
+ion-content::part(scroll),
+.inner-scroll {
+  scrollbar-width: thin;                 /* Firefox */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* IE/Edge legado */
+}
+
+/* WebKit (Chrome/Android/desktop, etc.) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+ion-content::part(scroll)::-webkit-scrollbar,
+.inner-scroll::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+ion-content::part(scroll)::-webkit-scrollbar-thumb,
+.inner-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.16);   /* muy sutil */
+  border-radius: calc(var(--sb-size) / 2);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+ion-content::part(scroll)::-webkit-scrollbar-track,
+.inner-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }

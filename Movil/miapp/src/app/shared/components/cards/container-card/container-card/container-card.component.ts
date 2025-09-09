@@ -1,20 +1,22 @@
-import { Component, inject, Input } from '@angular/core';
-import { ProductSelectModel } from 'src/app/shared/models/product/product.model';
-import { CardComponent } from '../../card/card/card.component';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FavoriteService } from 'src/app/shared/services/favorite/favorite';
-import { IonCardContent, IonContent, IonCardTitle, IonCardHeader, IonCard } from "@ionic/angular/standalone";
+import { IonicModule } from '@ionic/angular';
+
+import { ProductSelectModel } from 'src/app/shared/models/product/product.model';
+import { CardComponent } from '../../card/card.component';
+
 
 @Component({
   selector: 'app-container-card',
-  imports: [IonCard, IonCardHeader, IonCardTitle, IonContent, IonCardContent, CardComponent, CommonModule],
+  standalone: true,
+  imports: [CommonModule, IonicModule, CardComponent],
   templateUrl: './container-card.component.html',
-  styleUrl: './container-card.component.css',
+  styleUrls: ['./container-card.component.scss'],
 })
 export class ContainerCardComponent {
   @Input() title = 'Últimos Agregados';
   @Input() showHeader = true;
-  @Input() showFavorite = true; // <- define si el card muestra el botón
+  @Input() showFavorite = true;
   @Input({ required: true }) products: ProductSelectModel[] = [];
 
   trackById = (_: number, p: ProductSelectModel) => p.id;
