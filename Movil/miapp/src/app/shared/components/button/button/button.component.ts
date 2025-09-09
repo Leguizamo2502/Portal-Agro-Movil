@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [CommonModule, IonicModule],
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
   @Input() text: string = 'Botón';

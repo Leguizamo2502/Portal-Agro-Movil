@@ -20,7 +20,7 @@ import { AuthState } from 'src/app/core/services/auth/auth.state';
     IfLoggedOutDirective
   ],
   templateUrl: './navbar-bueno.component.html',
-  styleUrls: ['./navbar-bueno.component.css']
+  styleUrls: ['./navbar-bueno.component.scss']
 })
 export class NavbarBuenoComponent {
   // Inputs para usar <app-button>

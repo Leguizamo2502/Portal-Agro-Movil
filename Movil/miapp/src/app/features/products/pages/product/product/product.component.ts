@@ -29,7 +29,7 @@ import { CategoryNodeModel } from 'src/app/features/parameters/models/category/c
     ButtonComponent
   ],
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
   private productService  = inject(ProductService);

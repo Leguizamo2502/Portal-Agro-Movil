@@ -26,7 +26,7 @@ import { ButtonComponent } from '../../button/button/button.component';
   standalone: true,
   imports: [CommonModule, FormsModule, IonicModule, ButtonComponent],
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css'],
+  styleUrls: ['./product-detail.component.scss'],
 })
 export class ProductDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);

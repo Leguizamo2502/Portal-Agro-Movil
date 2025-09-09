@@ -14,7 +14,7 @@ import { UserSelectModel } from 'src/app/core/models/user.model';
   standalone: true,
   imports: [CommonModule, IonicModule, HasRoleDirective],
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private sidebarService = inject(SidebarService);
