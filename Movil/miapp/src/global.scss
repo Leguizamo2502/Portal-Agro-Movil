@@ -1,12 +1,6 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -28,13 +22,37 @@
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
+ * Desactivado para mantener fondo claro estable.
  */
-
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-::ng-deep ion-content.sidebar-content .inner-scroll.scroll-y {
-  overflow-y: none !important;
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* ===== Base suave (NO forzamos ion-content global) ===== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f9f7f1; /* color de “lienzo” por detrás */
+}
+
+/* ===== Utilidades por página =====
+   Úsalas en el <ion-content> de cada vista:
+   - class="bg-default"     -> fondo claro
+   - class="bg-transparent" -> respeta fondos propios (login, etc.)
+========================================================== */
+ion-content.bg-default {
+  --background: #f9f7f1;
+  background: #f9f7f1;
+}
+
+ion-content.bg-transparent {
+  --background: transparent;
+  background: transparent;
+}
+
+/* (Opcional) Ajuste de scroll en tu sidebar */
+:host ::ng-deep ion-content.sidebar-content .inner-scroll.scroll-y {
+  overflow-y: hidden !important;
 }

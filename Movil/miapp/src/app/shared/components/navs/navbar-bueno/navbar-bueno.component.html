@@ -1,3 +1,89 @@
-<p>
-  navbar-bueno works!
-</p>
+<ion-header class="custom-navbar">
+  <ion-toolbar>
+    <div class="container-fluid">
+      <!-- Desktop Layout -->
+      <div class="d-none d-lg-flex w-100 align-items-center">
+        <!-- Logo y título -->
+        <div class="navbar-brand-section">
+          <img src="logos/logo.png" alt="" class="logo" />
+          <a class="navbar-brand color-title ms-2" routerLink="/home/inicio">
+            Portal Agro-comercial del Huila
+          </a>
+        </div>
+
+        <!-- Búsqueda centrada -->
+        <form class="search-form mx-auto" role="search">
+          <ion-input class="search-input" type="search" placeholder="Buscar"></ion-input>
+          <ion-button class="search-btn" type="submit" fill="clear">
+            <ion-icon name="search"></ion-icon>
+          </ion-button>
+        </form>
+
+        <!-- Iconos derecha -->
+        <div class="desktop-icons">
+          <a class="nav-link custom-text" routerLink="/home/inicio">Inicio</a>
+          <a class="nav-link custom-text" routerLink="/home/product">Productos</a>
+
+          <!-- Botón login/registro con inputs del mismo TS -->
+          <ion-button *appIfLoggedOut [routerLink]="redirectTo || '/auth/login'">
+            {{ text || 'Inicia Sesión/Regístrate' }}
+          </ion-button>
+
+          <a class="nav-link custom-text" routerLink="/home/inicio" *appIfLoggedIn>
+            <ion-icon name="notifications"></ion-icon>
+          </a>
+
+          <div class="dropdown" *appIfLoggedIn>
+            <a class="nav-link custom-text dropdown-toggle" role="button" data-bs-toggle="dropdown">
+              <ion-icon name="person-circle"></ion-icon>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" routerLink="/account">Mi Cuenta</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" (click)="logOut()">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Layout -->
+      <div class="d-lg-none w-100">
+        <!-- Primera fila mobile -->
+        <div class="d-flex align-items-center mobile-top-row">
+          <ion-button
+            class="navbar-toggler"
+            fill="clear"
+            (click)="toggleSidebar()"
+            *ngIf="isAccountRoute || router.url == '/account'">
+            <ion-icon name="menu"></ion-icon>
+          </ion-button>
+
+          <form class="search-form-mobile flex-grow-1 mx-3" role="search">
+            <ion-input class="search-input" type="search" placeholder="¿Qué buscas?"></ion-input>
+            <ion-button class="search-btn" type="submit" fill="clear">
+              <ion-icon name="search"></ion-icon>
+            </ion-button>
+          </form>
+
+          <div class="mobile-icons">
+            <a class="custom-text" routerLink="/home/inicio">
+              <ion-icon name="notifications"></ion-icon>
+            </a>
+            <a class="custom-text" routerLink="/account">
+              <ion-icon name="person-circle"></ion-icon>
+            </a>
+            <!-- <a class="custom-text" routerLink="/home/inicio">
+              <ion-icon name="cart"></ion-icon>
+            </a> -->
+          </div>
+        </div>
+
+        <!-- Segunda fila mobile: botones de navegación -->
+        <div class="mobile-nav-buttons">
+          <a class="mobile-nav-btn" routerLink="/home/inicio">Inicio</a>
+          <a class="mobile-nav-btn" routerLink="/home/product">Productos</a>
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>

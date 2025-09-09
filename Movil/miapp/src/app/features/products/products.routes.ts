@@ -1,0 +1,8 @@
+import { Routes } from "@angular/router";
+import { ProductDetailComponent } from "../../shared/components/product-detail/product-detail/product-detail.component";
+import { ProductComponent } from "./pages/product/product/product.component";
+
+export const PRODUCTS_ROUTES: Routes=[
+    {path:'',component:ProductComponent},
+    {path:':id', component: ProductDetailComponent},
+];

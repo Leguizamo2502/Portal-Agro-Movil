@@ -1,0 +1,166 @@
+/* Barra de navegación personalizada */
+.custom-navbar {
+  background-color: #2e7d32;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+/* Estilo para texto blanco */
+.custom-text {
+  color: #ffffff !important;
+}
+
+.custom-text:hover {
+  color: #1cc736 !important;
+}
+
+/* Estilo para el título en la barra */
+.color-title {
+  color: #ffffff !important;
+}
+
+/* Logo */
+.logo {
+  height: 5vh;
+  width: auto;
+}
+
+/* Sección marca (logo y título) en escritorio */
+.navbar-brand-section {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.navbar-brand {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Formulario de búsqueda (escritorio) */
+.search-form {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Formulario de búsqueda (móvil) */
+.search-form-mobile {
+  position: relative;
+}
+
+/* Input de búsqueda */
+.search-input {
+  --padding-start: 15px; /* Ionic var para ion-input */
+  padding: 8px 45px 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  width: 100%;
+  background-color: white;
+}
+
+/* Botón de búsqueda */
+.search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #666;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+/* Iconos (escritorio) */
+.desktop-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 0 0 auto;
+}
+
+.desktop-icons .nav-link {
+  color: #ffffff !important;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.desktop-icons .nav-link:hover {
+  color: #1cc736 !important;
+}
+
+/* Barra móvil */
+.mobile-top-row {
+  padding: 10px 15px;
+}
+
+/* Botón menú móvil */
+.navbar-toggler {
+  border: none;
+  padding: 4px 8px;
+}
+
+/* Iconos móvil */
+.mobile-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.mobile-icons a {
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* Botones de navegación móvil */
+.mobile-nav-buttons {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px 15px;
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: 500;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-btn:last-child {
+  border-right: none;
+}
+
+.mobile-nav-btn:hover {
+  color: #1cc736 !important;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Ajustes responsive para pantallas pequeñas */
+@media (max-width: 991px) {
+  .custom-navbar .container-fluid {
+    padding: 0;
+  }
+}
+
+/* Utilidades Bootstrap que usas (si no cargas Bootstrap, puedes dejarlas como clases neutrales) */
+.d-none { display: none !important; }
+.d-lg-flex { display: flex !important; }
+.d-lg-none { display: none !important; }
+@media (min-width: 992px) {
+  .d-lg-none { display: none !important; }
+  .d-lg-flex { display: flex !important; }
+}
+.w-100 { width: 100% !important; }
+.align-items-center, .ion-align-items-center { align-items: center !important; }
+.ms-2 { margin-left: .5rem !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.mx-3 { margin-left: 1rem !important; margin-right: 1rem !important; }

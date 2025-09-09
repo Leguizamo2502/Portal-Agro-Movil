@@ -1,34 +1,7 @@
-<ion-menu contentId="main-content" side="start" menuId="main-menu" type="overlay">
-  <app-sidebar></app-sidebar>
-</ion-menu>
-
-<!-- Este es el contenido principal -->
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content class="home-content">
-    <div class="home-container">
-      <app-carrusel></app-carrusel>
-
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Bienvenido</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          Aquí va el contenido de tu Home.
-        </ion-card-content>
-      </ion-card>
-      <ion-footer>
-        <app-footer></app-footer>
-      </ion-footer>
-    </div>
-  </ion-content>
-
-</div>
+<app-carrusel></app-carrusel>
+<!-- <div style="color:#ed0d0d">productos: {{ products?.length }}</div> -->
+<app-container-card
+  [title]="'Últimos Agregados'"
+  [showHeader]="true"
+  [products]="products">
+</app-container-card>

@@ -1,0 +1,103 @@
+<div class="container py-3">
+  <h1 class="title">Productos Disponibles</h1>
+
+  <div class="bg-white rounded-3 shadow-sm mb-2 d-flex flex-column flex-md-row
+              align-items-center justify-content gap-2 header-compact">
+
+    <!-- Breadcrumb / título -->
+    <div class="header-text">
+      <ion-icon name="filter" class="me-1"></ion-icon>
+    </div>
+
+    <!-- Selector de categorías + limpiar -->
+    <div class="d-flex align-items-center gap-2 controls">
+      <ion-select
+        class="select"
+        label="Selecciona una categoría"
+        interface="popover"
+        [disabled]="isLoadingCategories || atLeaf"
+        [formControl]="categoryCtrl"
+        (ionChange)="onSelectCategory($event.detail.value)">
+        <ion-select-option
+          *ngFor="let c of categories; trackBy: trackById"
+          [value]="c.id">
+          <div class="d-flex">
+            <span>{{ c.name }}</span>
+            <ion-icon *ngIf="c.hasChildren" name="chevron-forward"></ion-icon>
+          </div>
+        </ion-select-option>
+      </ion-select>
+
+      <app-button
+        [text]="''"
+        size="sm"
+        (click)="clearFilter()"
+        [disabled]="!breadcrumb.length"
+        aria-label="Limpiar filtro"
+        [icon]="'refresh'">
+      </app-button>
+    </div>
+
+    <!-- Migas -->
+    <div class="d-flex flex-wrap breadcrumb-wrap">
+      <ion-chip (click)="clearFilter()" color="medium">
+        <ion-label>Todas</ion-label>
+      </ion-chip>
+
+      <ng-container *ngFor="let crumb of breadcrumb; let i = index; trackBy: trackById">
+        <ion-icon name="chevron-forward" class="crumb-sep"></ion-icon>
+
+        <ion-chip
+          *ngIf="i < breadcrumb.length - 1; else lastCrumb"
+          (click)="onBreadcrumbClick(i)">
+          <ion-label>{{ crumb.name }}</ion-label>
+        </ion-chip>
+
+        <ng-template #lastCrumb>
+          <ion-chip color="primary">
+            <ion-label>{{ crumb.name }}</ion-label>
+          </ion-chip>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <ion-progress-bar *ngIf="isLoadingProducts" type="indeterminate" class="mb-3"></ion-progress-bar>
+
+  <!-- Resultados -->
+  <div class="bg-white p-3 rounded-3 shadow-sm">
+    <app-container-card-flex
+      [items]="pagedProducts"
+      [type]="'product'"
+      [showFavorite]="true">
+    </app-container-card-flex>
+
+    <div *ngIf="!isLoadingProducts && products?.length === 0" class="text-center text-muted py-4">
+      <ion-icon name="cube-outline" class="mb-2"></ion-icon>
+      <div>Sin productos para esta categoría.</div>
+    </div>
+
+    <!-- Paginación (sustituto de MatPaginator) -->
+    <div *ngIf="products!.length > pageSize" class="d-flex align-items-center gap-2 mt-2">
+      <ion-button size="small" fill="outline" (click)="onPrevPage()" [disabled]="pageIndex === 0">
+        Anterior
+      </ion-button>
+
+      <div> Página {{ pageIndex + 1 }} / {{ totalPages }} </div>
+
+      <ion-button size="small" fill="outline" (click)="onNextPage()"
+                  [disabled]="(pageIndex + 1) >= totalPages">
+        Siguiente
+      </ion-button>
+
+      <ion-select
+        interface="popover"
+        label="Items por página"
+        [value]="pageSize"
+        (ionChange)="onPageSizeChange($event.detail.value)">
+        <ion-select-option *ngFor="let opt of pageSizeOptions" [value]="opt">{{ opt }}</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+</div>
