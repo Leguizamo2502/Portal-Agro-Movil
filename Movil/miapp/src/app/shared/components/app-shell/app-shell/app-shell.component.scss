@@ -1,0 +1,6 @@
+/* app-shell.component.scss */
+/* Aplica a los ion-content que se renderizan dentro del shell */
+:host ::ng-deep ion-content {
+  --padding-top: 0 !important;
+  --padding-bottom: env(safe-area-inset-bottom) !important;
+}

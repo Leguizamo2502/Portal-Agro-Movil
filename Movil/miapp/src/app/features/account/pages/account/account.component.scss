@@ -1,0 +1,24 @@
+/* Contenedor de la página (respeta el scroll de MainLayout) */
+.account-page {
+  padding: 20px;
+}
+
+/* Caja blanca centrada */
+.account-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  background: #fff;
+}
+
+/* Espaciado interno consistente */
+.account-card-content {
+  padding: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .account-page { padding: 12px; }
+  .account-card-content { padding: 16px; }
+}

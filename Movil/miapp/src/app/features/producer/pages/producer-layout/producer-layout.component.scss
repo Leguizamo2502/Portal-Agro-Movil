@@ -1,0 +1,26 @@
+.producer-layout {
+  display: grid;
+  gap: 12px;
+}
+
+/* Segmented tabs estilo limpio */
+.segmented-tabs {
+  --background: #ffffff;
+  --indicator-color: #2e7d32; /* verde del proyecto */
+  --color: #1f2937;
+  --color-checked: #ffffff;
+  --background-checked: #2e7d32;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+
+ion-segment-button {
+  --border-radius: 10px;
+  min-height: 40px;
+}
+
+ion-segment-button ion-label {
+  font-weight: 600;
+}

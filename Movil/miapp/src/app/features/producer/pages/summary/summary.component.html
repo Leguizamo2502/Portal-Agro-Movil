@@ -1,3 +1,34 @@
-<p>
-  summary works!
-</p>
+<!-- summary.component.html -->
+<ion-content class="ion-padding">
+  <section class="container">
+    <h1 class="title">Resumen</h1>
+
+    <ion-grid class="stat-grid">
+      <ion-row class="ion-justify-content-start ion-align-items-stretch">
+        <ion-col size="12" sizeMd="6" sizeLg="4">
+          <app-stat-card [text]="'Pedidos Pendientes'"></app-stat-card>
+        </ion-col>
+
+        <ion-col size="12" sizeMd="6" sizeLg="4">
+          <app-stat-card [text]="'Pedidos Completados'" [icon]="'check-circle'"></app-stat-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card class="chart-card">
+      <ion-card-header>
+        <ion-card-title>Ventas por producto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="chart-container">
+          <canvas
+            baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </section>
+</ion-content>

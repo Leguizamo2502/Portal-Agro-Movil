@@ -1,3 +1,25 @@
-<p>
-  product-list works!
-</p>
+<section class="top ion-padding">
+  <!-- Crear -->
+  <ion-button routerLink="/account/producer/management/product/create" color="primary">
+    <ion-icon slot="start" name="add"></ion-icon>
+    Crear Producto
+  </ion-button>
+
+  <!-- Grid de tarjetas -->
+  <div class="top">
+    <app-container-card-flex
+      [type]="'product'"
+      [items]="products"
+      [showActions]="true"
+      (editProduct)="onEdit($event)"
+      (deleteProduct)="onDelete($event)">
+    </app-container-card-flex>
+  </div>
+
+  <!-- Vacío -->
+  <ng-container *ngIf="products.length === 0">
+    <ion-item lines="none">
+      <ion-label color="medium">No tienes productos todavía.</ion-label>
+    </ion-item>
+  </ng-container>
+</section>

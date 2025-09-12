@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { CanMatchFn } from '@angular/router';
 
-import { RoleMatchGuard } from './role-match.guard';
+import { roleMatchGuard } from './role-match.guard';
 
-describe('RoleMatchGuard', () => {
-  let service: RoleMatchGuard;
+describe('roleMatchGuard', () => {
+  const executeGuard: CanMatchFn = (...guardParameters) => 
+      TestBed.runInInjectionContext(() => roleMatchGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RoleMatchGuard);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(executeGuard).toBeTruthy();
   });
 });

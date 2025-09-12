@@ -1,7 +1,10 @@
-<app-carrusel></app-carrusel>
-<!-- <div style="color:#ed0d0d">productos: {{ products?.length }}</div> -->
-<app-container-card
-  [title]="'Últimos Agregados'"
-  [showHeader]="true"
-  [products]="products">
-</app-container-card>
+<!-- home.component.html -->
+<ion-content [fullscreen]="true" class="home-content">
+  <app-carrusel></app-carrusel>
+
+  <app-container-card
+    [title]="'Últimos Agregados'"
+    [showHeader]="true"
+    [products]="products">
+  </app-container-card>
+</ion-content>

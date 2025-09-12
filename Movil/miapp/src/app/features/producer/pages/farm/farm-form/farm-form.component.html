@@ -1,3 +1,193 @@
-<p>
-  farm-form works!
-</p>
+<div class="form-wrapper-transparent">
+  <!-- Header de pasos (simple) -->
+  <div class="steps-header">
+    <div class="step-pill" [class.active]="step === 1">1</div>
+    <div class="step-line"></div>
+    <div class="step-pill" [class.active]="step === 2">2</div>
+    <div class="step-line"></div>
+    <div class="step-pill" [class.active]="step === 3">3</div>
+  </div>
+
+  <!-- ===== PASO 1: Datos de la finca ===== -->
+  <form *ngIf="step === 1" [formGroup]="generalGroup" (ngSubmit)="goToNextFromGeneral()">
+    <div *ngIf="createWithProducer" class="producer-info">
+      <h3>Información de productor</h3>
+      <p class="muted">Esta información se usará para crear tu perfil de productor.</p>
+
+      <ion-item lines="full">
+        <ion-label position="stacked">Añade una descripción para tu perfil de productor</ion-label>
+        <ion-textarea
+          formControlName="description"
+          auto-grow="true"
+          maxlength="1000"
+          rows="4"
+          placeholder="Escribe una breve descripción...">
+        </ion-textarea>
+      </ion-item>
+      <div class="hint-row">
+        <ion-note>{{ (generalGroup.get('description')?.value?.length || 0) }}/1000</ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('description')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+      </div>
+    </div>
+
+    <div class="info">
+      <h3>{{ isEdit ? 'Editar finca' : 'Nueva finca' }}</h3>
+      <span>Complete la información general</span>
+    </div>
+
+    <div class="row-2">
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Nombre de finca</ion-label>
+        <ion-input formControlName="name" maxlength="120" placeholder="Ej: Finca La Esperanza"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="generalGroup.get('name')?.invalid && generalGroup.get('name')?.touched">
+        Obligatorio (mín 2, máx 100)
+      </ion-note>
+
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Hectáreas</ion-label>
+        <ion-input type="number" inputmode="decimal" formControlName="hectares" placeholder="Ej: 12.5"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="generalGroup.get('hectares')?.invalid && generalGroup.get('hectares')?.touched">
+        Debe ser mayor a 0
+      </ion-note>
+    </div>
+
+    <div class="row-2">
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Altitud (msnm)</ion-label>
+        <ion-input type="number" inputmode="numeric" formControlName="altitude" placeholder="Ej: 1500"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="generalGroup.get('altitude')?.invalid && generalGroup.get('altitude')?.touched">
+        No negativo (0–9000)
+      </ion-note>
+    </div>
+
+    <div class="actions">
+      <app-button text="Siguiente" color="primary" [disabled]="generalGroup.invalid" [type]="'submit'"></app-button>
+    </div>
+  </form>
+
+  <!-- ===== PASO 2: Ubicación ===== -->
+  <form *ngIf="step === 2" [formGroup]="ubicacionGroup" (ngSubmit)="goToNextFromUbicacion()">
+    <div class="info">
+      <h3>Ubicación</h3>
+      <span>Selecciona departamento y ciudad, y marca la ubicación en el mapa</span>
+    </div>
+
+    <div class="row-2 top">
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Departamento</ion-label>
+        <ion-select
+          interface="popover"
+          placeholder="Selecciona…"
+          formControlName="departmentId"
+          (ionChange)="onDepartmentChange($event.detail.value)">
+          <ion-select-option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note color="danger" *ngIf="ubicacionGroup.get('departmentId')?.invalid && ubicacionGroup.get('departmentId')?.touched">
+        Obligatorio
+      </ion-note>
+
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Ciudad</ion-label>
+        <ion-select interface="popover" placeholder="Selecciona…" formControlName="cityId">
+          <ion-select-option *ngFor="let c of cities" [value]="c.id">{{ c.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note color="danger" *ngIf="ubicacionGroup.get('cityId')?.invalid && ubicacionGroup.get('cityId')?.touched">
+        Obligatorio
+      </ion-note>
+    </div>
+
+    <div class="row-2">
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Latitud</ion-label>
+        <ion-input type="number" inputmode="decimal" formControlName="latitude" (ionBlur)="onLatLngManualChange()"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="ubicacionGroup.get('latitude')?.invalid && ubicacionGroup.get('latitude')?.touched">
+        Obligatorio (−90 a 90)
+      </ion-note>
+
+      <ion-item lines="full" class="w-100">
+        <ion-label position="stacked">Longitud</ion-label>
+        <ion-input type="number" inputmode="decimal" formControlName="longitude" (ionBlur)="onLatLngManualChange()"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="ubicacionGroup.get('longitude')?.invalid && ubicacionGroup.get('longitude')?.touched">
+        Obligatorio (−180 a 180)
+      </ion-note>
+    </div>
+
+    <div #mapContainer class="map"></div>
+
+    <div class="actions space-between">
+      <app-button text="Anterior" color="secondary" (clicked)="goToPrev()"></app-button>
+      <app-button text="Siguiente" color="primary" [disabled]="ubicacionGroup.invalid" [type]="'submit'"></app-button>
+    </div>
+  </form>
+
+  <!-- ===== PASO 3: Imágenes ===== -->
+  <div *ngIf="step === 3">
+    <div class="info">
+      <h3>Imágenes de la finca</h3>
+      <span>Máximo {{ MAX_IMAGES }} imágenes. Tamaño ≤ {{ MAX_FILE_SIZE_MB }} MB.</span>
+    </div>
+
+    <div class="drop-zone"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDropOrInput($event.dataTransfer?.files || null)"
+         [class.dragover]="isDragging"
+         (click)="fileInput.click()">
+      <ion-icon name="cloud-upload-outline" class="dz-icon"></ion-icon>
+      <p>Arrastra aquí o haz clic para seleccionar</p>
+      <small>Formatos: JPG, PNG, WEBP</small>
+      <input #fileInput type="file" accept="image/*" multiple hidden (change)="onDropOrInput(fileInput.files)" />
+    </div>
+
+    <div class="image-counter">
+      {{ selectedFiles.length + existingImages.length }}/{{ MAX_IMAGES }} imágenes
+    </div>
+
+    <div class="compact-image-grid">
+      <!-- existentes -->
+      <div class="compact-image-container" *ngFor="let img of existingImages; let i = index">
+        <img [src]="img.imageUrl" alt="Imagen existente" class="compact-image" />
+        <div class="compact-image-actions">
+          <ion-button size="small" fill="solid" color="danger" (click)="removeImage(i, true)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+        <span class="compact-image-label">Existente</span>
+      </div>
+
+      <!-- nuevas -->
+      <div class="compact-image-container" *ngFor="let prev of imagesPreview; let i = index">
+        <img [src]="prev" alt="Vista previa" class="compact-image" />
+        <div class="compact-image-actions">
+          <ion-button size="small" fill="solid" color="danger" (click)="removeImage(i, false)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </div>
+        <span class="compact-image-label">Nueva</span>
+      </div>
+    </div>
+
+    <div class="actions space-between">
+      <app-button text="Anterior" color="secondary" (clicked)="goToPrev()"></app-button>
+      <app-button
+        [text]="isEdit ? 'Actualizar' : 'Crear'"
+        color="primary"
+        [disabled]="isLoading || (!isEdit && (selectedFiles.length + existingImages.length) === 0)"
+        (clicked)="submit()">
+      </app-button>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <app-button text="Cancelar" color="secondary" [back]="true"></app-button>
+  </div>
+</div>

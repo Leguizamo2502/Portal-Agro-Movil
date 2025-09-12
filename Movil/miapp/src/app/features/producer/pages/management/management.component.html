@@ -1,3 +1,15 @@
-<p>
-  management works!
-</p>
+<section class="management ion-padding">
+  <h2 class="title">Gestión</h2>
+
+  <!-- Tabs con Ionic -->
+  <ion-segment [value]="segmentValue" (ionChange)="onSegmentChange($event)" class="segmented-tabs">
+    <ion-segment-button *ngFor="let t of tabs" [value]="t.path">
+      <ion-label>{{ t.label }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Contenido de cada pestaña (rutas hijas) -->
+  <div class="segment-panel">
+    <router-outlet></router-outlet>
+  </div>
+</section>

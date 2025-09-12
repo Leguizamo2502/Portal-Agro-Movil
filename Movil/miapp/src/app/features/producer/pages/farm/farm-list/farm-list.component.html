@@ -1,3 +1,24 @@
-<p>
-  farm-list works!
-</p>
+<ion-content class="ion-padding">
+  <div class="top">
+    <ion-button routerLink="/account/producer/management/farm/create">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Crear Finca
+    </ion-button>
+  </div>
+
+  <ng-container *ngIf="farms.length; else empty">
+    <app-container-card-flex
+      [type]="'farm'"
+      [items]="farms"
+      [showActions]="true"
+      (editFarm)="onEdit($event)"
+      (deleteFarm)="onDelete($event)">
+    </app-container-card-flex>
+  </ng-container>
+
+  <ng-template #empty>
+    <ion-item lines="none">
+      <ion-label color="medium">No tienes fincas registradas aún.</ion-label>
+    </ion-item>
+  </ng-template>
+</ion-content>

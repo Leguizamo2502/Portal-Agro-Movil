@@ -26,7 +26,7 @@ export class CardComponent {
   @Output() edit = new EventEmitter<ProductSelectModel>();
   @Output() delete = new EventEmitter<ProductSelectModel>();
 
-  private readonly placeholder = 'img/cargaImagen.png';
+private readonly placeholder = '/assets/img/cargaImagen.png';
 
   get imageUrl(): string {
     const url = this.product?.images?.[0]?.imageUrl;

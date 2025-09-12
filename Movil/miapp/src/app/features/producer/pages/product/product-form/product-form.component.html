@@ -1,3 +1,260 @@
-<p>
-  product-form works!
-</p>
+<section class="form-wrapper-transparent">
+  <!-- Tabs de pasos -->
+  <ion-segment mode="md" [value]="step()" (ionChange)="onStepChange($event)">
+    <ion-segment-button value="general">
+      <ion-label>Datos del producto</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="detalles" [disabled]="generalGroup.invalid">
+      <ion-label>Detalles</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="imagenes" [disabled]="generalGroup.invalid || detallesGroup.invalid">
+      <ion-label>Imágenes</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Paso 1: Datos generales -->
+  <div *ngIf="step()==='general'" class="step-pane">
+    <div class="info">
+      <h3>{{ isEdit ? 'Editar producto' : 'Nuevo producto' }}</h3>
+      <span>Complete la información general</span>
+    </div>
+
+    <form [formGroup]="generalGroup" class="form-container" (ngSubmit)="goNextFromGeneral()">
+      <div class="row-2">
+        <!-- Nombre -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input
+            type="text"
+            formControlName="name"
+            placeholder="Ingrese el nombre del producto"
+            [maxlength]="100"
+            (ionInput)="onInputChange($event, 'name')">
+          </ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="generalGroup.get('name')?.touched && generalGroup.get('name')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('name')?.touched && generalGroup.get('name')?.hasError('minlength')">
+          Mínimo 2 caracteres.
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('name')?.touched && generalGroup.get('name')?.hasError('maxlength')">
+          Máximo 100 caracteres.
+        </ion-note>
+
+        <!-- Precio -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Precio</ion-label>
+          <ion-input type="number" formControlName="price" placeholder="0"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="!isEdit">Máximo 100,000,000</ion-note>
+        <ion-note *ngIf="isEdit">Máximo 1,000,000</ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('price')?.touched && generalGroup.get('price')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('price')?.touched && generalGroup.get('price')?.hasError('pattern')">
+          Solo se permiten números.
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('price')?.touched && generalGroup.get('price')?.hasError('max')">
+          Supera el máximo permitido.
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('price')?.touched && generalGroup.get('price')?.hasError('min')">
+          No se permiten números negativos.
+        </ion-note>
+      </div>
+
+      <div class="row-2">
+        <!-- Unidad -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Unidad</ion-label>
+          <ion-input
+            formControlName="unit"
+            placeholder="kg, lb, arroba, etc."
+            [maxlength]="20"
+            (ionInput)="onInputChange($event, 'unit')">
+          </ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="generalGroup.get('unit')?.touched && generalGroup.get('unit')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('unit')?.touched && generalGroup.get('unit')?.hasError('maxlength')">
+          Máximo 20 caracteres.
+        </ion-note>
+
+        <!-- Producción -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Producción</ion-label>
+          <ion-input
+            formControlName="production"
+            [attr.maxlength]="isEdit ? 50 : 150"
+            placeholder="Orgánico, convencional, etc."
+            (ionInput)="onInputChange($event, 'production')">
+          </ion-input>
+        </ion-item>
+        <ion-note *ngIf="!isEdit">Máximo 150</ion-note>
+        <ion-note *ngIf="isEdit">Máximo 50</ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('production')?.touched && generalGroup.get('production')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="generalGroup.get('production')?.touched && generalGroup.get('production')?.hasError('maxlength')">
+          Supera el máximo permitido.
+        </ion-note>
+      </div>
+
+      <!-- Descripción -->
+      <ion-item class="w-100" lines="inset">
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea
+          formControlName="description"
+          [maxlength]="500"
+          rows="3"
+          placeholder="Describe tu producto"
+          (ionInput)="onInputChange($event, 'description')">
+        </ion-textarea>
+      </ion-item>
+      <ion-note color="danger" *ngIf="generalGroup.get('description')?.touched && generalGroup.get('description')?.hasError('required')">
+        Obligatorio
+      </ion-note>
+      <ion-note color="danger" *ngIf="generalGroup.get('description')?.touched && generalGroup.get('description')?.hasError('minlength')">
+        Mínimo 5 caracteres.
+      </ion-note>
+      <ion-note color="danger" *ngIf="generalGroup.get('description')?.touched && generalGroup.get('description')?.hasError('maxlength')">
+        Máximo 500 caracteres.
+      </ion-note>
+
+      <div class="actions">
+        <ion-button type="submit" [disabled]="generalGroup.invalid">Siguiente</ion-button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Paso 2: Detalles -->
+  <div *ngIf="step()==='detalles'" class="step-pane">
+    <form [formGroup]="detallesGroup" class="form-container" (ngSubmit)="goNextFromDetails()">
+      <div class="row-2 top">
+        <!-- Stock -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Stock</ion-label>
+          <ion-input type="number" formControlName="stock" min="0" placeholder="0"></ion-input>
+        </ion-item>
+        <ion-note>Máximo 100,000</ion-note>
+        <ion-note color="danger" *ngIf="detallesGroup.get('stock')?.touched && detallesGroup.get('stock')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="detallesGroup.get('stock')?.touched && detallesGroup.get('stock')?.hasError('min')">
+          No puede ser negativo.
+        </ion-note>
+        <ion-note color="danger" *ngIf="detallesGroup.get('stock')?.touched && detallesGroup.get('stock')?.hasError('max')">
+          No puede superar 100,000.
+        </ion-note>
+
+        <!-- Estado -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Estado</ion-label>
+          <ion-select formControlName="status" interface="popover">
+            <ion-select-option [value]="true">Activo</ion-select-option>
+            <ion-select-option [value]="false">Inactivo</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-note color="danger" *ngIf="detallesGroup.get('status')?.touched && detallesGroup.get('status')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+      </div>
+
+      <div class="row-2">
+        <!-- Categoría -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Categoría</ion-label>
+          <ion-select formControlName="categoryId" interface="popover" placeholder="Selecciona una">
+            <ion-select-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-note color="danger" *ngIf="detallesGroup.get('categoryId')?.touched && detallesGroup.get('categoryId')?.hasError('required')">
+          Obligatorio
+        </ion-note>
+        <ion-note color="danger" *ngIf="detallesGroup.get('categoryId')?.touched && detallesGroup.get('categoryId')?.hasError('positiveInt')">
+          Debe seleccionar una categoría válida.
+        </ion-note>
+
+        <!-- Fincas (multi) -->
+        <ion-item class="w-100" lines="inset">
+          <ion-label position="stacked">Fincas</ion-label>
+          <ion-select formControlName="farmIds" [multiple]="true" interface="popover" [placeholder]="farmsPlaceholder()">
+            <ion-select-option *ngFor="let f of farms" [value]="f.id">{{ f.name }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-note>Selecciona una o varias fincas (mínimo 1).</ion-note>
+        <ion-note color="danger" *ngIf="detallesGroup.get('farmIds')?.touched && detallesGroup.get('farmIds')?.hasError('arrayMinLen')">
+          Debes seleccionar al menos una finca.
+        </ion-note>
+      </div>
+
+      <div class="actions space-between">
+        <ion-button fill="outline" color="medium" type="button" (click)="backToGeneral()">Anterior</ion-button>
+        <ion-button type="submit" [disabled]="detallesGroup.invalid">Siguiente</ion-button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Paso 3: Imágenes -->
+  <div *ngIf="step()==='imagenes'" class="step-pane">
+    <div class="info">
+      <h3>Imágenes del producto</h3>
+      <span>Máximo {{ MAX_IMAGES }} imágenes. Tamaño ≤ {{ MAX_FILE_SIZE_MB }} MB.</span>
+    </div>
+
+    <div class="drop-zone"
+         [class.dragover]="isDragging"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDropOrInput($event.dataTransfer?.files || null)"
+         (click)="canAddMore && fileInput.click()">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+      <p>Arrastra aquí o haz clic para seleccionar</p>
+      <small>Formatos: JPG, PNG, WEBP</small>
+      <input #fileInput type="file" accept="image/*" multiple hidden
+             (change)="onDropOrInput(fileInput.files)" [disabled]="!canAddMore"/>
+    </div>
+
+    <div class="image-counter" [class.error]="!canAddMore">
+      {{ totalImages }}/{{ MAX_IMAGES }} imágenes
+      <ng-container *ngIf="!canAddMore"> • Límite alcanzado</ng-container>
+    </div>
+
+    <div class="compact-image-grid">
+      <!-- existentes -->
+      <div class="compact-image-container" *ngFor="let img of existingImages; let i = index">
+        <img [src]="img.imageUrl" alt="Imagen existente" class="compact-image" />
+        <div class="compact-image-actions">
+          <ion-button size="small" fill="clear" color="danger" (click)="removeImage(i, true)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <span class="compact-image-label">Existente</span>
+      </div>
+
+      <!-- nuevas -->
+      <div class="compact-image-container" *ngFor="let prev of imagesPreview; let i = index">
+        <img [src]="prev" alt="Vista previa" class="compact-image" />
+        <div class="compact-image-actions">
+          <ion-button size="small" fill="clear" color="danger" (click)="removeImage(i, false)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <span class="compact-image-label">Nueva</span>
+      </div>
+    </div>
+
+    <div class="actions space-between">
+      <ion-button fill="outline" color="medium" type="button" (click)="backToDetalles()">Anterior</ion-button>
+      <ion-button (click)="submit()"
+                  [disabled]="isLoading || (!isEdit && totalImages === 0) || totalImages > MAX_IMAGES">
+        {{ isEdit ? 'Actualizar' : 'Crear' }}
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <ion-button fill="outline" color="medium" type="button" (click)="cancelNav()">Cancelar</ion-button>
+  </div>
+</section>

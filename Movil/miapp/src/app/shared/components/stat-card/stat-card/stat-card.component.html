@@ -1,3 +1,11 @@
-<p>
-  stat-card works!
-</p>
+<!-- src/app/shared/components/stat-card/stat-card.component.html -->
+<ion-card class="stat-card" [attr.aria-label]="text + ' ' + count">
+  <ion-card-content class="stat-card__content">
+    <div class="icon-wrap">
+      <ion-icon [name]="icon" aria-hidden="true"></ion-icon>
+    </div>
+
+    <div class="label">{{ text }}</div>
+    <div class="value">{{ count }}</div>
+  </ion-card-content>
+</ion-card>

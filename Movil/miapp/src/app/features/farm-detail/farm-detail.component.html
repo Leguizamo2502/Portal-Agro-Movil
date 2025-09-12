@@ -1,3 +1,118 @@
-<p>
-  farm-detail works!
-</p>
+<!-- Botón volver -->
+<app-button
+  [type]="'button'"
+  [color]="'primary'"
+  [text]="'Volver'"
+  [icon]="'arrow-back'"
+  [back]="true"
+  class="detail-header to-overlay">
+</app-button>
+
+<ion-content fullscreen class="ion-padding">
+
+  <!-- Estado: cargando -->
+  <ng-container *ngIf="loadingFarm">
+    <ion-card class="farm-card">
+      <ion-card-content>
+        <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 40%; height: 14px;" class="mt-2"></ion-skeleton-text>
+        <div class="mt-4">
+          <ion-skeleton-text animated style="width: 100%; height: 220px;"></ion-skeleton-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- Estado: error -->
+  <ion-text color="danger" *ngIf="!loadingFarm && errorMsg" class="ion-margin-top">
+    <p class="ion-text-center">{{ errorMsg }}</p>
+  </ion-text>
+
+  <!-- Datos -->
+  <ng-container *ngIf="!loadingFarm && !errorMsg && farm as f">
+
+    <ion-card class="farm-card">
+      <!-- Encabezado -->
+      <div class="farm-header">
+        <h2 class="farm-title">{{ f.name }}</h2>
+        <div class="farm-subtitle">{{ f.cityName }}, {{ f.departmentName }}</div>
+      </div>
+
+      <ion-card-content class="farm-content">
+        <!-- Galería -->
+        <div class="content-image-product">
+          <!-- Miniaturas -->
+          <div *ngIf="f.images?.length" class="thumbnails">
+            <ion-img
+              *ngFor="let img of f.images; trackBy: trackByImage"
+              [src]="img.imageUrl"
+              (click)="changeMainImage(img.imageUrl)"
+              class="thumbnail-img">
+            </ion-img>
+          </div>
+
+          <!-- Imagen principal -->
+          <div class="main-image">
+            <ion-img [src]="mainImage" class="main-img"></ion-img>
+          </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map-wrapper ion-margin-top">
+          <ng-container *ngIf="mapUrl as m; else noMap">
+            <iframe
+              class="map-iframe"
+              [src]="m"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </ng-container>
+          <ng-template #noMap>
+            <div class="ion-padding ion-text-center ion-text-muted">
+              Sin coordenadas para mostrar mapa.
+            </div>
+          </ng-template>
+        </div>
+
+        <!-- Ficha de información -->
+        <ion-card class="info-card ion-margin-top">
+          <ion-card-content>
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-label">Tamaño de la finca</div>
+                <div class="info-value">{{ f.hectares }} hectáreas</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Dueño</div>
+                <div class="info-value">{{ f.producerName }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Ubicación</div>
+                <div class="info-value">{{ f.cityName }}, {{ f.departmentName }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Altitud</div>
+                <div class="info-value">{{ f.altitude }} m</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Latitud</div>
+                <div class="info-value">{{ f.latitude }}</div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-label">Longitud</div>
+                <div class="info-value">{{ f.longitude }}</div>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-card-content>
+    </ion-card>
+
+  </ng-container>
+</ion-content>

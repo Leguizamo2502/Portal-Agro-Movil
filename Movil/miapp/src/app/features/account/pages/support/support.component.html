@@ -1,3 +1,39 @@
-<p>
-  support works!
-</p>
+<ion-content class="support-content">
+  <div class="container">
+
+    <!-- Título de página -->
+    <h2 class="page-title">Contáctanos</h2>
+
+    <!-- Intro -->
+    <h3 class="section-head">Ponte en contacto</h3>
+    <p class="lead">
+      ¡Estamos aquí para ayudar! Contáctanos con cualquier pregunta o comentario.
+    </p>
+
+    <!-- Información de contacto -->
+    <h3 class="section-head">Información de contacto</h3>
+
+    <ion-list inset class="section">
+      <ion-item lines="none" class="list-item">
+        <div slot="start" class="icon-badge">
+          <ion-icon name="mail"></ion-icon>
+        </div>
+        <ion-label>
+          <h4>Correo electrónico</h4>
+          <p class="muted">{{ email }}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="list-item">
+        <div slot="start" class="icon-badge">
+          <ion-icon name="call"></ion-icon>
+        </div>
+        <ion-label>
+          <h4>Teléfono</h4>
+          <p class="muted">{{ phone }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

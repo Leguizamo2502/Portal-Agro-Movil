@@ -2,7 +2,7 @@
  * App Global CSS
  * ----------------------------------------------------------------------------
  */
-
+@import "leaflet/dist/leaflet.css";
 /* Core CSS requerido por Ionic */
 @import "@ionic/angular/css/core.css";
 
@@ -18,6 +18,41 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* ===================== */
+/*  Tema de colores      */
+/* ===================== */
+/* Define el primario verde y aplica colores por defecto del toolbar.
+   (Pon aquí tu paleta para que TODO Ionic use este color en lugar del azul) */
+:root {
+  --ion-color-primary: #19b361;
+  --ion-color-primary-rgb: 25, 179, 97;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #159a53;
+  --ion-color-primary-tint: #31c276;
+
+  /* Si quieres que TODOS los toolbars usen fondo verde con contenido blanco: */
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-color: var(--ion-color-primary-contrast);
+}
+
+/* Asegura que los ion-icon hereden el color del texto del contenedor */
+ion-icon {
+  color: currentColor;
+}
+
+/* En tu navbar (fondo verde), fuerza íconos y textos en blanco */
+.custom-navbar,
+.custom-navbar ion-icon,
+.custom-navbar .nav-link,
+.custom-navbar .mobile-nav-btn {
+  color: var(--ion-color-primary-contrast) !important;
+}
+
+/* ===================== */
+/*  Base de la app       */
+/* ===================== */
 
 /* Dark mode desactivado globalmente (lo manejas tú por página si quieres) */
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
@@ -46,6 +81,7 @@ ion-content.bg-transparent {
 :host ::ng-deep ion-content.sidebar-content .inner-scroll.scroll-y {
   overflow-y: hidden !important;
 }
+
 /* ===== Scrollbar global ultra-delgada (sin quitar scroll) ===== */
 :root { --sb-size: 1px; } /* cambia a 3px si la quieres aún más fina */
 
@@ -70,7 +106,7 @@ html::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb,
 ion-content::part(scroll)::-webkit-scrollbar-thumb,
 .inner-scroll::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.16);   /* muy sutil */
+  background: rgba(0,0,0,.16);
   border-radius: calc(var(--sb-size) / 2);
 }
 

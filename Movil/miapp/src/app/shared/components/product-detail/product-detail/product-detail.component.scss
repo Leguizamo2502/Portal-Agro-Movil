@@ -1,0 +1,172 @@
+/* wrapper general */
+.detail-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* volver */
+.back-row { margin-bottom: 12px; }
+
+/* ===== GRID superior ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 16px;
+}
+@media (max-width: 992px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* === Galería === */
+.gallery {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 576px) {
+  .gallery { grid-template-columns: 1fr; }
+}
+
+/* thumbs (columna desktop, fila móvil) */
+.thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+@media (max-width: 576px) {
+  .thumbs { flex-direction: row; overflow-x: auto; }
+}
+.thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  background: #fff;
+}
+
+/* imagen principal */
+.main-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+}
+.main-img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+/* === Info card (beige) === */
+.info-card {
+  background: #f5f1e5;
+  border: 1px solid #e6dfcc;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.info-title {
+  margin: 0 0 12px;
+  border-bottom: 1px solid #e6dfcc;
+  padding-bottom: 8px;
+}
+.info-row {
+  display: flex;
+  gap: 6px;
+  margin: 6px 0;
+  font-size: 14px;
+}
+.info-row .lbl { color: #374151; font-weight: 600; }
+.info-row .val { color: #111827; }
+.price { font-weight: 700; color: #1b5e20; }
+.cta-row { margin-top: 12px; }
+
+/* === Paneles (Descripción, Más info, Calificación, Reseñas) === */
+.panel {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}
+.panel-title {
+  margin: 0 0 8px;
+  color: #1e4620;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+.panel-text { margin: 0; color: #374151; }
+
+.panel-pair { display: grid; gap: 8px; }
+.pair .lbl { font-weight: 600; color: #374151; }
+.pair .val { color: #111827; }
+
+/* === Calificación === */
+.rating .avg-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.avg-num { font-size: 28px; font-weight: 700; }
+.avg-stars ion-icon { font-size: 20px; color: #f4b400; }
+.muted { color: #6b7280; }
+.small { font-size: 12px; }
+
+.dist-row {
+  display: grid;
+  grid-template-columns: 14px 1fr 44px;
+  gap: 8px;
+  align-items: center;
+  margin: 6px 0;
+}
+.dist-bar {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.dist-fill {
+  height: 100%;
+  background: #1f2937;
+}
+
+/* === Reseñas === */
+.review-form { display: grid; gap: 8px; }
+.stars-pick ion-icon {
+  font-size: 24px;
+  color: #f4b400;
+  cursor: pointer;
+}
+.review-textarea {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+.submit-row { margin-top: 4px; }
+
+.reviews-list { display: grid; gap: 12px; }
+.review-item {
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  padding: 12px;
+}
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.who .name { font-weight: 600; }
+.stars-inline ion-icon { font-size: 18px; color: #f4b400; }
+.review-text { margin: 8px 0 0; color: #374151; }

@@ -1,19 +1,15 @@
+/* home.component.scss */
 .home-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
+  --background: #f8f7f2;
+  --padding-top: 0;                 /* el header ya está arriba */
+  --padding-bottom: env(safe-area-inset-bottom); /* SIN hueco extra */
 }
 
-.home-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-app-carrusel {
+app-carrusel,
+app-container-card {
   display: block;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
+  margin: 0;              /* evita márgenes que empujen hacia el footer */
 }
+
+/* opcional: un respiro pequeño al final si lo quieres */
+.home-content > *:last-child { margin-bottom: 8px; }

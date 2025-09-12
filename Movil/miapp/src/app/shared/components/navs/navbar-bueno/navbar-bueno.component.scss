@@ -1,88 +1,42 @@
-/* Color VERDE consistente en todos los toolbars del header */
-.custom-navbar ion-toolbar {
-  --background: #2e7d32;
-  --color: #ffffff;
-  --border-color: transparent;
+/* Colores exactos */
+$verde: #2e7d32;
+$blanco: #ffffff;
+
+/* Fuerza el color del toolbar, evitando overrides globales */
+.nb-header,
+.nb-onebar,
+.nb-header ion-toolbar.nb-onebar {
+  --background: #2e7d32 !important;
+  --color: #ffffff !important;
+  --border-color: transparent !important;
 }
-.custom-navbar { background: #2e7d32; } /* fallback */
 
-/* Texto & estados */
-.custom-text { color: #fff !important; }
-.custom-text:hover, .is-active { color: #1cc736 !important; }
-.color-title { color: #fff !important; }
-
-/* Logo */
-.logo { height: 5vh; width: auto; }
-
-/* Marca (desktop) */
-.navbar-brand-section { display: flex; align-items: center; flex: 0 0 auto; }
-.navbar-brand { text-decoration: none; font-size: 1.1rem; font-weight: 500; white-space: nowrap; }
-
-/* Buscadores */
-.search-form, .mobile-search { position: relative; }
-.search-form { width: 100%; max-width: 400px; }
-
-.search-input {
-  --padding-start: 15px;
-  padding: 8px 45px 8px 15px;
-  border: 1px solid #1f6a25;
-  border-radius: 25px;
+/* Estructura de una sola fila */
+.nb-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* logo | espacio | iconos */
+  align-items: center;
   width: 100%;
-  background: #fff;
-  color: #1f2937;
+  min-height: 56px;
+  padding: 0 8px;
 }
 
-.search-btn {
-  position: absolute;
-  right: 8px; top: 50%; transform: translateY(-50%);
-  color: #1f6a25;
+/* IZQUIERDA */
+.nb-left { display: flex; align-items: center; }
+.nb-logo { height: 22px; width: auto; display: block; }
+
+/* CENTRO (sin nada, solo para centrar composición) */
+.nb-center { min-width: 0; }
+
+/* DERECHA */
+.nb-right { display: flex; align-items: center; gap: 2px; }
+.nb-right ion-button { --padding-start: 6px; --padding-end: 6px; }
+
+/* Iconos blancos como en la captura */
+ion-button, ion-icon { color: $blanco !important; }
+
+/* Compacto en pantallas angostas */
+@media (max-width: 360px) {
+  .nb-logo { height: 18px; }
+  .nb-row { min-height: 50px; }
 }
-
-/* Desktop acciones */
-.desktop-icons { display: flex; align-items: center; gap: 15px; flex: 0 0 auto; }
-.desktop-icons .nav-link {
-  color: #fff !important; text-decoration: none; padding: 8px 12px; border-radius: 4px; transition: .3s;
-}
-.desktop-icons .nav-link:hover { color: #1cc736 !important; }
-
-/* ===== MÓVIL ===== */
-.only-desktop { display: none; }
-.only-mobile { display: flex; }
-
-.mobile-search {
-  flex: 1;               /* ocupa el centro */
-  max-width: 480px;
-  margin: 0 8px;
-  display: flex; align-items: center;
-}
-
-.navbar-toggler { color: #fff; }
-
-.mobile-icons ion-button { --padding-start: 6px; --padding-end: 6px; color: #fff; }
-
-/* Segunda fila (tabs) */
-.mobile-tabs { padding: 0; }
-.mobile-nav-buttons {
-  display: flex;
-  background: #2e7d32;
-  border-top: 1px solid rgba(255,255,255,.15);
-}
-.mobile-nav-btn {
-  flex: 1; text-align: center; padding: 12px 15px;
-  color: #fff !important; text-decoration: none; font-weight: 500;
-  border-right: 1px solid rgba(255,255,255,.1); transition: .3s;
-}
-.mobile-nav-btn:last-child { border-right: none; }
-.mobile-nav-btn:hover, .mobile-nav-btn.is-active {
-  color: #1cc736 !important; background: rgba(255,255,255,.05);
-}
-
-/* Breakpoints: a partir de 992px mostramos desktop y ocultamos móvil */
-@media (min-width: 992px) {
-  .only-desktop { display: flex; }
-  .only-mobile { display: none; }
-}
-
-/* Utilidades que ya usabas */
-.ms-2 { margin-left: .5rem !important; }
-.mx-auto { margin-left: auto !important; margin-right: auto !important; }

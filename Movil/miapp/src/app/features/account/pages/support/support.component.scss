@@ -1,0 +1,79 @@
+/* Fondo marfil como en la captura */
+.support-content {
+  --background: #f8f7f2;
+}
+
+/* Contenedor central con padding */
+.container {
+  padding: 12px 12px 24px;
+}
+
+/* Título verde centrado (coincide con estilo de Cuenta) */
+.page-title {
+  margin: 6px 6px 14px;
+  text-align: left;         /* en la captura el título principal del contenido va alineado a la izquierda */
+  color: #1e4620;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+/* Subtítulos de sección */
+.section-head {
+  margin: 8px 6px 6px;
+  color: #1e4620;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Párrafo introductorio */
+.lead {
+  margin: 0 6px 12px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Lista tipo tarjeta, igual al estilo de Info */
+.section { margin-top: 6px; }
+
+.list-item {
+  --background: #ffffff;
+  --padding-start: 10px;
+  --inner-padding-end: 10px;
+  border-radius: 12px;
+  margin: 6px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+/* Badge verde claro con el ícono dentro */
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e8f3ec;  /* verde muy claro */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: #1f6a25;       /* ícono verde oscuro */
+  font-size: 20px;
+}
+
+/* Tipografía dentro del item */
+ion-item h4 {
+  margin: 0 0 2px;
+  font-size: 15px;
+  color: #1e4620;
+  font-weight: 600;
+}
+.muted {
+  margin: 0;
+  color: #4f7b5a;       /* tono verdoso como en la captura */
+  font-size: 13px;
+}
+
+/* Responsive fino */
+@media (max-width: 360px) {
+  .page-title { font-size: 18px; }
+  .section-head { font-size: 15px; }
+}

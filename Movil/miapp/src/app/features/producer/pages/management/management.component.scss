@@ -1,0 +1,23 @@
+.management {
+  .title {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    color: #1e4620;
+  }
+}
+
+.segmented-tabs {
+  margin-bottom: 12px;
+  --background: #f4f6f8;
+  --indicator-color: #2e7d32;
+  --color-checked: #2e7d32;
+  --color: #455a64;
+  border-radius: 12px;
+}
+
+.segment-panel {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 12px;
+}

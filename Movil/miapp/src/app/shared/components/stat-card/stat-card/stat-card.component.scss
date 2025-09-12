@@ -1,0 +1,52 @@
+/* src/app/shared/components/stat-card/stat-card.component.css */
+:host {
+  --accent: #19b361;
+  --text-strong: #212529;
+  --text-muted: #475569;
+  display: inline-block;
+}
+
+/* Tarjeta */
+.stat-card {
+  border: 1.5px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: none;
+  min-width: 180px;
+  max-width: 220px;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+  transform: translateY(-1px);
+}
+
+/* Contenido */
+.stat-card__content {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 14px 18px;
+}
+
+/* Icono */
+.icon-wrap ion-icon {
+  font-size: 28px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* Textos */
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin-top: -2px;
+}

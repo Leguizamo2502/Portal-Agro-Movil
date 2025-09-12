@@ -1,3 +1,125 @@
-<p>
-  info works!
-</p>
+<ion-content class="account-content">
+
+  <!-- Encabezado de usuario -->
+  <div class="user-header ion-text-center">
+    <h2 class="user-name">{{ person?.firstName }} {{ person?.lastName }}</h2>
+    <p class="user-email">{{ person?.email || 'No disponible' }}</p>
+  </div>
+
+  <!-- Pedidos -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Pedidos</ion-list-header>
+
+    <ion-item button lines="none" routerLink="/home/pedidos" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="cube-outline"></ion-icon>
+      </div>
+      <ion-label>Mis Pedidos</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Información Básica -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Información Básica</ion-list-header>
+
+    <ion-item lines="none" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="call"></ion-icon>
+      </div>
+      <ion-label>
+        <h3>Número de teléfono</h3>
+        <p class="muted">{{ person?.phoneNumber || '+57 000 0000000' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Información Adicional -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Información Adicional</ion-list-header>
+
+    <ion-item lines="none" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="id-card"></ion-icon>
+      </div>
+      <ion-label>
+        <h3>Documento de identidad</h3>
+        <p class="muted">{{ person?.identification || 'No disponible' }}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="location"></ion-icon>
+      </div>
+      <ion-label>
+        <h3>Dirección</h3>
+        <p class="muted">{{ person?.address || 'No disponible' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Opciones de Cuenta -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Opciones de Cuenta</ion-list-header>
+
+    <ion-item button lines="none" routerLink="/account/info/updateDataBasic" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="create-outline"></ion-icon>
+      </div>
+      <ion-label>Actualizar Información</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" routerLink="/account/info/changePassword" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="key-outline"></ion-icon>
+      </div>
+      <ion-label>Cambiar Contraseña</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" (click)="onLogout()" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </div>
+      <ion-label>Cerrar Sesión</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Productor -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Productor</ion-list-header>
+
+    <ion-item button lines="none" routerLink="/account/producer" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+      <ion-label>Opciones de Productor</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" routerLink="/account/producer/resume" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+      </div>
+      <ion-label>Resumen</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Soporte -->
+  <ion-list inset class="section">
+    <ion-list-header class="section-title">Soporte</ion-list-header>
+
+    <ion-item button lines="none" routerLink="/account/support" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </div>
+      <ion-label>Ayuda</ion-label>
+    </ion-item>
+
+    <ion-item button lines="none" routerLink="/account/support/contact" class="list-item">
+      <div slot="start" class="icon-badge">
+        <ion-icon name="mail"></ion-icon>
+      </div>
+      <ion-label>Contáctanos</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

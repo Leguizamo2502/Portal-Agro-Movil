@@ -1,0 +1,27 @@
+/* Contenedor general */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Espaciado entre tarjetas de stats */
+.stat-grid {
+  margin-top: 8px;
+}
+
+/* Tarjeta y contenedor del gráfico */
+.chart-card {
+  margin-top: 16px;
+}
+
+.chart-container {
+  position: relative;
+  height: 320px;  /* controlado con maintainAspectRatio: false */
+  width: 100%;
+}
+
+/* Título */
+.title {
+  margin: 0 0 8px;
+  font-weight: 700;
+}

@@ -1,0 +1,66 @@
+/* Fondo suave y espaciado general como en la captura */
+.account-content {
+  --background: #f8f7f2; /* marfil muy claro */
+  padding: 12px 12px 24px;
+}
+
+/* Encabezado de usuario */
+.user-header {
+  margin: 8px 6px 14px;
+}
+.user-name {
+  margin: 6px 0 2px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e4620;
+}
+.user-email {
+  margin: 0;
+  color: #2e7d32;
+  font-size: 14px;
+}
+
+/* Título de sección */
+.section { margin-bottom: 8px; }
+.section-title {
+  font-weight: 700;
+  color: #1e4620;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Ítems estilo tarjeta con icono en badge verde claro */
+.list-item {
+  --background: #ffffff;
+  --padding-start: 10px;
+  --inner-padding-end: 10px;
+  border-radius: 12px;
+  margin: 6px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e8f3ec;     /* verde muy claro */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: #1f6a25;          /* icono verde oscuro */
+  font-size: 20px;
+}
+
+/* Tipografía del item: título + subtítulo verde/gris */
+ion-item h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
+  color: #1e4620;
+  font-weight: 600;
+}
+.muted {
+  margin: 0;
+  color: #4f7b5a; /* verde grisáceo para subtítulos (tel, dirección) */
+  font-size: 13px;
+}

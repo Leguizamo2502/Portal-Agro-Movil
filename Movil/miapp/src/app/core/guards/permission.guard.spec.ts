@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { CanActivateFn } from '@angular/router';
 
-import { PermissionGuard } from './permission.guard';
+import { permissionGuard } from './permission.guard';
 
-describe('PermissionGuard', () => {
-  let service: PermissionGuard;
+describe('permissionGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) => 
+      TestBed.runInInjectionContext(() => permissionGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PermissionGuard);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(executeGuard).toBeTruthy();
   });
 });

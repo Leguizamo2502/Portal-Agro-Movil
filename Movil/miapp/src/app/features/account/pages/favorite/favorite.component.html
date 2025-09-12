@@ -1,3 +1,20 @@
-<p>
-  favorite works!
-</p>
+<h2 class="title">Mis Favoritos</h2>
+
+<!-- Pull to refresh opcional (solo si el contenedor padre no lo bloquea) -->
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content pullingText="Desliza para actualizar"></ion-refresher-content>
+</ion-refresher>
+
+<app-container-card-flex
+  [type]="'product'"
+  [items]="products"
+  [showFavorite]="true"
+  [showActions]="false">
+</app-container-card-flex>
+
+<!-- Estado vacío -->
+<div *ngIf="!loading && products?.length === 0" class="empty">
+  <ion-icon name="heart-outline"></ion-icon>
+  <p>No tienes productos en favoritos todavía.</p>
+  <ion-button routerLink="/home/product" fill="solid" class="btn-primary">Explorar productos</ion-button>
+</div>

@@ -1,16 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpInterceptorFn } from '@angular/common/http';
 
-import { CredentialsInterceptor } from './credentials.interceptor';
+import { credentialsInterceptor } from './credentials.interceptor';
 
-describe('CredentialsInterceptor', () => {
-  let service: CredentialsInterceptor;
+describe('credentialsInterceptor', () => {
+  const interceptor: HttpInterceptorFn = (req, next) => 
+    TestBed.runInInjectionContext(() => credentialsInterceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CredentialsInterceptor);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(interceptor).toBeTruthy();
   });
 });

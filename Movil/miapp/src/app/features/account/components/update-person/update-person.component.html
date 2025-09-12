@@ -1,3 +1,72 @@
-<p>
-  update-person works!
-</p>
+<!-- update-person.component.html -->
+<div class="form-wrapper-transparent">
+  <h2 class="titleForm">{{ title }}</h2>
+
+  <!-- 👇 OJO: agregamos #fg="ngForm" -->
+  <form (ngSubmit)="save()" [formGroup]="form" #fg="ngForm" class="form-container">
+
+    <!-- Nombres -->
+    <ion-item class="input-item" lines="none">
+      <ion-label position="stacked">Nombres</ion-label>
+      <ion-input formControlName="firstName" placeholder="Ingresa tus nombres"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+              *ngIf="f.firstName.errors?.['required'] && (f.firstName.touched || fg.submitted)">
+      Este campo es obligatorio
+    </ion-note>
+    <ion-note color="danger"
+              *ngIf="f.firstName.errors?.['minlength'] && (f.firstName.touched || fg.submitted)">
+      Mínimo 2 caracteres
+    </ion-note>
+
+    <!-- Apellidos -->
+    <ion-item class="input-item" lines="none">
+      <ion-label position="stacked">Apellidos</ion-label>
+      <ion-input formControlName="lastName" placeholder="Ingresa tus apellidos"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+              *ngIf="f.lastName.errors?.['required'] && (f.lastName.touched || fg.submitted)">
+      Este campo es obligatorio
+    </ion-note>
+    <ion-note color="danger"
+              *ngIf="f.lastName.errors?.['minlength'] && (f.lastName.touched || fg.submitted)">
+      Mínimo 2 caracteres
+    </ion-note>
+
+    <!-- Dirección -->
+    <ion-item class="input-item" lines="none">
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-input formControlName="address" placeholder="Ingresa tu dirección"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+              *ngIf="f.address.errors?.['required'] && (f.address.touched || fg.submitted)">
+      Este campo es obligatorio
+    </ion-note>
+    <ion-note color="danger"
+              *ngIf="f.address.errors?.['minlength'] && (f.address.touched || fg.submitted)">
+      Mínimo 4 caracteres
+    </ion-note>
+
+    <!-- Teléfono -->
+    <ion-item class="input-item" lines="none">
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input formControlName="phoneNumber" inputmode="numeric" placeholder="Solo dígitos"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+              *ngIf="f.phoneNumber.errors?.['required'] && (f.phoneNumber.touched || fg.submitted)">
+      Este campo es obligatorio
+    </ion-note>
+    <ion-note color="danger"
+              *ngIf="f.phoneNumber.errors?.['pattern'] && (f.phoneNumber.touched || fg.submitted)">
+      Debe tener entre 7 y 15 dígitos
+    </ion-note>
+
+    <!-- Botones -->
+    <div class="form-actions cont-botones">
+      <app-button [text]="'Guardar'" [icon]="'save'" [type]="'submit'"
+                  [disabled]="form.invalid || isLoading"></app-button>
+      <app-button [text]="'Cancelar'" [icon]="'cancel'" [color]="'secondary'"
+                  (click)="cancel()"></app-button>
+    </div>
+  </form>
+</div>

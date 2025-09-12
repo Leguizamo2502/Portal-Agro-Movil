@@ -1,0 +1,15 @@
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: flex-start;
+}
+
+/* Si llegas a usar <app-card> suelto, deja este bloque */
+.product-container app-card {
+  flex: 0 1 250px;
+  max-width: 250px;
+}
+
+/* Pequeños ajustes visuales */
+.top { margin-top: 12px; }

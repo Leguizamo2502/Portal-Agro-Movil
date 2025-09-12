@@ -74,7 +74,7 @@ export class LoginComponent {
           return;
         }
         await this.toast('Inicio de sesión exitoso.', 'success');
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home/inicio');
       },
       error: async (err) => {
         const msg = err?.status === 401

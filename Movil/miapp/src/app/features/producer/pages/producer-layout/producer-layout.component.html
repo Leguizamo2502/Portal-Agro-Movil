@@ -1,3 +1,20 @@
-<p>
-  producer-layout works!
-</p>
+<section class="producer-layout ion-padding">
+  <!-- Tabs/Segment -->
+  <ion-segment
+    mode="md"
+    [value]="selected"
+    (ionChange)="onSegmentChange($event)"
+    class="segmented-tabs"
+  >
+    <ion-segment-button
+      *ngFor="let t of tabs"
+      [value]="t.path"
+      [ariaLabel]="t.label"
+    >
+      <ion-label>{{ t.label }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Contenido de las rutas hijas -->
+  <ion-router-outlet></ion-router-outlet>
+</section>
